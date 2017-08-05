@@ -1,0 +1,246 @@
+[
+    {
+        "name": "bjeavons/zxcvbn-php",
+        "version": "0.3.0",
+        "version_normalized": "0.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/bjeavons/zxcvbn-php.git",
+            "reference": "331a88932d1a399c989967d3399a4a40eb182fd5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/bjeavons/zxcvbn-php/zipball/331a88932d1a399c989967d3399a4a40eb182fd5",
+            "reference": "331a88932d1a399c989967d3399a4a40eb182fd5",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.3 || ^7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*",
+            "satooshi/php-coveralls": "*"
+        },
+        "time": "2017-01-06T15:43:33+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "ZxcvbnPhp\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "See contributors",
+                "homepage": "https://github.com/bjeavons/zxcvbn-php"
+            }
+        ],
+        "description": "Realistic password strength estimation PHP library based on Zxcvbn JS",
+        "homepage": "https://github.com/bjeavons/zxcvbn-php",
+        "keywords": [
+            "password",
+            "zxcvbn"
+        ]
+    },
+    {
+        "name": "phpmailer/phpmailer",
+        "version": "v5.2.23",
+        "version_normalized": "5.2.23.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHPMailer/PHPMailer.git",
+            "reference": "7115df4a6f76281109ebe352900c42403b728bb4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/7115df4a6f76281109ebe352900c42403b728bb4",
+            "reference": "7115df4a6f76281109ebe352900c42403b728bb4",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.0.0"
+        },
+        "require-dev": {
+            "doctrine/annotations": "1.2.*",
+            "jms/serializer": "0.16.*",
+            "phpdocumentor/phpdocumentor": "2.*",
+            "phpunit/phpunit": "4.8.*",
+            "symfony/debug": "2.8.*",
+            "symfony/filesystem": "2.8.*",
+            "symfony/translation": "2.8.*",
+            "symfony/yaml": "2.8.*",
+            "zendframework/zend-cache": "2.5.1",
+            "zendframework/zend-config": "2.5.1",
+            "zendframework/zend-eventmanager": "2.5.1",
+            "zendframework/zend-filter": "2.5.1",
+            "zendframework/zend-i18n": "2.5.1",
+            "zendframework/zend-json": "2.5.1",
+            "zendframework/zend-math": "2.5.1",
+            "zendframework/zend-serializer": "2.5.*",
+            "zendframework/zend-servicemanager": "2.5.*",
+            "zendframework/zend-stdlib": "2.5.1"
+        },
+        "suggest": {
+            "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
+        },
+        "time": "2017-03-15T19:32:56+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "class.phpmailer.php",
+                "class.phpmaileroauth.php",
+                "class.phpmaileroauthgoogle.php",
+                "class.smtp.php",
+                "class.pop3.php",
+                "extras/EasyPeasyICS.php",
+                "extras/ntlm_sasl_client.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-2.1"
+        ],
+        "authors": [
+            {
+                "name": "Jim Jagielski",
+                "email": "jimjag@gmail.com"
+            },
+            {
+                "name": "Marcus Bointon",
+                "email": "phpmailer@synchromedia.co.uk"
+            },
+            {
+                "name": "Andy Prevost",
+                "email": "codeworxtech@users.sourceforge.net"
+            },
+            {
+                "name": "Brent R. Matzelle"
+            }
+        ],
+        "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "phpauth/phpauth",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHPAuth/PHPAuth.git",
+            "reference": "849274911beb8d235f3eb8228bb13ce77962be75"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PHPAuth/PHPAuth/zipball/849274911beb8d235f3eb8228bb13ce77962be75",
+            "reference": "849274911beb8d235f3eb8228bb13ce77962be75",
+            "shasum": ""
+        },
+        "require": {
+            "bjeavons/zxcvbn-php": "*",
+            "php": ">=5.4.0",
+            "phpmailer/phpmailer": "^5.2"
+        },
+        "time": "2016-07-14T15:45:30+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PHPAuth\\": "/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "A secure user authentication class for PHP websites, using a powerful password hashing system and attack blocking to keep your website and users secure.",
+        "homepage": "http://phpauth.github.io/PHPAuth/",
+        "keywords": [
+            "Authentication",
+            "class",
+            "secure"
+        ]
+    },
+    {
+        "name": "bassjobsen/bootstrap-3-typeahead",
+        "version": "4.0.2",
+        "version_normalized": "4.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/bassjobsen/Bootstrap-3-Typeahead.git",
+            "reference": "7b59699d14865a3b7355c0e05f7a9cdc75f7e8e4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/bassjobsen/Bootstrap-3-Typeahead/zipball/7b59699d14865a3b7355c0e05f7a9cdc75f7e8e4",
+            "reference": "7b59699d14865a3b7355c0e05f7a9cdc75f7e8e4",
+            "shasum": ""
+        },
+        "time": "2016-09-26T12:59:36+00:00",
+        "type": "component",
+        "extra": {
+            "component": {
+                "files": [
+                    "bootstrap3-typeahead.js",
+                    "bootstrap3-typeahead.min.js"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Bass Jobsen",
+                "email": "bass@w3masters.nl"
+            }
+        ],
+        "description": "Bootstrap 3 Typeahead"
+    },
+    {
+        "name": "bootstrap-select/bootstrap-select",
+        "version": "1.12.3",
+        "version_normalized": "1.12.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/silviomoreto/bootstrap-select.git",
+            "reference": "b58fe717acbbc10aa7da1b66df988dab9a248279"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/silviomoreto/bootstrap-select/zipball/b58fe717acbbc10aa7da1b66df988dab9a248279",
+            "reference": "b58fe717acbbc10aa7da1b66df988dab9a248279",
+            "shasum": ""
+        },
+        "suggest": {
+            "components/jquery": ">=1.8",
+            "twbs/bootstrap": "~3.0.0"
+        },
+        "time": "2017-07-06T21:51:58+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Silvio Moreto",
+                "homepage": "https://github.com/silviomoreto"
+            }
+        ],
+        "description": "Bootstrap-select is a jQuery plugin that utilizes Bootstrap's dropdown.js to style and bring additional functionality to standard select elements.",
+        "homepage": "http://silviomoreto.github.io/bootstrap-select",
+        "keywords": [
+            "bootstrap",
+            "form",
+            "replacement",
+            "select"
+        ]
+    }
+]
