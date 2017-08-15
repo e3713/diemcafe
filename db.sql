@@ -28,7 +28,7 @@ CREATE TABLE `CafeTable` (
   `HostUserID` int(11) NOT NULL DEFAULT '0',
   `LanguageCode` char(2) NOT NULL DEFAULT 'en',
   PRIMARY KEY (`TableID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `Conversation` (
   `ZoomLink` varchar(255) NOT NULL DEFAULT '',
   `TableID` smallint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`ConversationID`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +98,21 @@ CREATE TABLE `Language` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `Question`
+--
+
+DROP TABLE IF EXISTS `Question`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Question` (
+  `SectionID` smallint(5) unsigned NOT NULL,
+  `TranslationLanguage` char(2) NOT NULL DEFAULT 'en',
+  `Val` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`SectionID`,`TranslationLanguage`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `Round`
 --
 
@@ -107,7 +122,6 @@ DROP TABLE IF EXISTS `Round`;
 CREATE TABLE `Round` (
   `RoundID` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `RoundNumber` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `Question` varchar(255) NOT NULL DEFAULT '',
   `SectionID` smallint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`RoundID`),
   KEY `EventID` (`RoundID`)
@@ -144,7 +158,7 @@ CREATE TABLE `Thought` (
   `Val` text NOT NULL,
   `Stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ThoughtID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -261,7 +275,7 @@ CREATE TABLE `sessions` (
   `agent` varchar(200) NOT NULL,
   `cookie_crc` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -273,4 +287,4 @@ CREATE TABLE `sessions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-05 16:30:59
+-- Dump completed on 2017-08-15 19:51:49

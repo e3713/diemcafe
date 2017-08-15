@@ -2,7 +2,7 @@
 
 include "dbconnect.php";
 
-$sth = $dbh->prepare('select ZoomLink from CafeConversation where ConversationID = ?');
+$sth = $dbh->prepare('select ZoomLink from Conversation where ConversationID = ?');
 $sth->execute([$_POST['conversation_id']]);
 $row = $sth->fetch();
 

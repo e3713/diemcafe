@@ -3,7 +3,7 @@ require "vendor/autoload.php";
 
 include_once "dbconnect.php";
 include "DCafe.php";
-include "i18n.php";
+include_once "i18n.php";
 
 $I18N = new I18N();
 
@@ -121,6 +121,9 @@ A.carousel-control { width: 5% }
 DIV.jumbotron { background-image: linear-gradient(to right,rgba(236,80,34,0.1) 0,rgba(237,29,36,0.1) 100%); border-radius: 10px; }
 DIV.jumbotron-alt { background-image: linear-gradient(to right,rgba(236,80,34,0.2) 0,rgba(237,29,36,0.2) 100%); border-radius: 10px; }
 DIV.jumbotron OL, DIV.jumbotron UL { font-size: 18px }
+.container { font-size: 16px }
+DIV.row {padding-bottom: 10px }
+DIV.form-group INPUT { margin-bottom: 5px }
     </style>
   </head>
   <body>
@@ -141,10 +144,14 @@ DIV.jumbotron OL, DIV.jumbotron UL { font-size: 18px }
            <li><a href="/"><?php echo htmlentities($I18N->t('home'));?></a></li>
            <?php
            if(!$_SUPPRESS_NAV) {
+
              if($LOGIN_USER) {
-               echo '<li class="dropdown">' .
-               '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' . htmlentities($LOGIN_USER->name) . ' <span class="caret"></span></a>' .
-               '<ul class="dropdown-menu"><li><a href="/logout.php">' . $I18N->t('log_out') . '</a></li></ul></li>';
+               if(($current_event = CafeEvent::current($dbh)) && $current_event->state() == 'running') {
+                 echo '<li><a href="eventoverview.php">' . $I18N->t('current_event') .'</li>';
+//                 $current_conversation = $LOGIN_USER->current_conversation();
+               }
+               echo '<li><a href="#">' . htmlentities($LOGIN_USER->name) . '</a></li>';
+               echo '<li><a href="/logout.php">' . $I18N->t('log_out') . '</a></li>';
              } else {
                echo '<li><a href="/login.php">' . $I18N->t('log_in') . '</a></li>';
              }

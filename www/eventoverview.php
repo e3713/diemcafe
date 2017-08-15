@@ -16,11 +16,11 @@ if(($current_event = CafeEvent::current($dbh)) && $current_event->state() == 'ru
 
   echo '<ul class="list-group">';
   foreach ($sections as $section) {
-    echo '<li class="list-group-item">' . htmlentities($section->name);
+    echo '<li class="list-group-item">' . htmlentities($section->question($I18N->lang));
     echo '<ul class="list-group">';
     $rounds = $section->rounds();
     foreach($rounds as $round) {
-      echo '<li class="list-group-item">' . htmlentities(date('G:i', $round->start())) . ': ' . htmlentities($round->question) . '</li>';
+      echo '<li class="list-group-item">' . htmlentities($I18N->t('round') . ' '. $round->round_number) . ': ' . htmlentities(date('G:i', $round->start())) . '</li>';
     }
     echo '</ul>';
     echo '</li>';

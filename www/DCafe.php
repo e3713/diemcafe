@@ -131,8 +131,13 @@ class CafeUser {
 
 	}
 
-	public static function hosts($dbh) {
-		$sth = $dbh->prepare('select id from User where Host = 1');
+	public static function hosts($dbh, $logged_in_only) {
+		if($logged_in_only)
+			$SQL = 'select User.id from User inner join sessions on sessions.uid = User.id where sessions.expiredate > now() and User.Host = 1';
+		else {
+			$SQL = 'select User.id from User where Host = 1';
+		}
+		$sth = $dbh->prepare($SQL);
 		$sth->execute();
 		$rows = $sth->fetchAll(PDO::FETCH_NUM);
 
@@ -144,15 +149,25 @@ class CafeUser {
 
 	}
 
-	public static function count($dbh) {
-			$sth = $dbh->prepare('select count(*) from User');
-			$sth->execute();
-			$row = $sth->fetch(PDO::FETCH_NUM);
-			return $row[0];
+	public static function count($dbh, $logged_in_only) {
+		if($logged_in_only)
+			$SQL = 'select count(*) from User inner join sessions on sessions.uid = User.id where sessions.expiredate > now()';
+		else {
+			$SQL = 'select count(*) from User';
+		}
+		$sth = $dbh->prepare($SQL);
+		$sth->execute();
+		$row = $sth->fetch(PDO::FETCH_NUM);
+		return $row[0];
 	}
 
-	public static function enumerate($dbh) {
-			$sth = $dbh->prepare('select id from User');
+	public static function enumerate($dbh, $logged_in_only) {
+			if($logged_in_only)
+				$SQL = 'select User.id from User inner join sessions on sessions.uid = User.id where sessions.expiredate > now()';
+			else {
+				$SQL = 'select User.id from User';
+			}
+			$sth = $dbh->prepare($SQL);
 			$sth->execute();
 			$rows = $sth->fetchAll(PDO::FETCH_NUM);
 			$results = array();
@@ -323,13 +338,13 @@ class CafeEvent {
 		// Delete any existing table/conversation setup
 		$this->reset();
 
-		$users = CafeUser::enumerate($this->dbh);
+		$users = CafeUser::enumerate($this->dbh, true); // User logged-in users only
 
 		// Number of tables = number of users / max users per table, rounded up
-		$num_tables = ceil(CafeUser::count($this->dbh) / $max_users_per_table);
+		$num_tables = ceil(CafeUser::count($this->dbh, true) / $max_users_per_table);
 
 		// List of users that volunteered to be hosts
-		$hosts = CafeUser::hosts($this->dbh);
+		$hosts = CafeUser::hosts($this->dbh, true); // Only those currently logged in
 
 		// NB if there are insufficient hosts, we will silently violate max_users_per_table.
 		shuffle($hosts);
@@ -497,6 +512,7 @@ class CafeSection {
 	public $section_number;
 	public $name;
 	public $event_id;
+	public $question;
 
 	public function __construct(\PDO $dbh_in, $id_in) {
 		$this->dbh = $dbh_in;
@@ -508,6 +524,21 @@ class CafeSection {
 		$this->section_number = $row['SectionNumber'];
 		$this->name = $row['Name'];
 		$this->event_id = $row['EventID'];
+	}
+
+	public function question($lang) {
+			// Return the question text for this section, in the appropriate language. If not available, default to English.
+			$sth = $this->dbh->prepare("select Val from Question where SectionID = ? and TranslationLanguage = ?");
+			$sth->execute([$this->id, $lang]);
+			if($row = $sth->fetch())
+				return $row['Val'];
+
+			// No record found - default to English
+			$sth->execute([$this->id, 'en']);
+			if($row = $sth->fetch())
+				return $row['Val'];
+
+			return NULL;
 	}
 
 	/* Return a set of Round objects for the section */
@@ -551,7 +582,6 @@ class CafeRound {
 
 	public $id;
 	public $round_number;
-	public $question;
 	public $section_id;
 
 	public function __construct(\PDO $dbh_in, $id_in) {
@@ -562,7 +592,6 @@ class CafeRound {
 		$sth->execute([$this->id]);
 		$row = $sth->fetch();
 		$this->round_number = $row['RoundNumber'];
-		$this->question = $row['Question'];
 		$this->section_id = $row['SectionID'];
 	}
 

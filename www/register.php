@@ -195,6 +195,16 @@ if(count($VALIDATION_ERRORS) || !count($_POST)) {
     'register' => htmlentities($I18N->t('register')),
     'register_intro' => htmlentities($I18N->t('register_intro'))
   ];
+
+  $sth = $dbh->prepare('select LanguageCode, Val from Language where TranslationLanguage = ? order by Val');
+  $sth->execute([$I18N->lang]);
+  $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+$LANGUAGES = '';
+foreach($rows as $row) {
+  $LANGUAGES .= '<option value="' . $row['LanguageCode'] . '">' . htmlentities($row['Val']) . '</option>';
+}
+
 echo <<<ENDFORM
 <p>$TEXTS[register_intro]</p>
 <p>$VAL_ENC[general]</p>
@@ -234,39 +244,44 @@ echo <<<ENDFORM
 
 <div class="form-group$ERROR_CLASSES[language1]">
   <label class="control-label" for="language1">$TEXTS[native_language]:</label>
-  <input type="text" id="language1" data-id="language1_id" autocomplete="off" class="form-control" placeholder="$TEXTS[native_language]" name="language1" value="$POST_ENC[language1]" aria-describedby="language1_help">
+  <select name="language1_id" id="language1_id" class="selectpicker">$LANGUAGES</select>
+  <script>$('#language1_id').selectpicker('val', '$_POST[language1_id]');</script>
   $GLYPHS[language1]
-  <input type="hidden" name="language1_id" id="language1_id" value="$POST_ENC[language1_id]"/>
 </div>
 
 <div class="form-group$ERROR_CLASSES[language2]">
   <label class="control-label" for="language2">$TEXTS[other_language]:</label>
-  <input type="text" id="language2" data-id="language2_id" autocomplete="off" class="form-control" placeholder="$TEXTS[other_language]" name="language2" value="$POST_ENC[language2]" aria-describedby="language2_help">
+  <select name="language2_id" id="language2_id" class="selectpicker">$LANGUAGES</select>
+  <script>$('#language2_id').selectpicker('val', '$_POST[language2_id]');</script>
   $GLYPHS[language2]
-  <input type="hidden" name="language2_id" id="language2_id" value="$POST_ENC[language2_id]"/>
   </div>
 
   <div class="form-group">
   <label class="control-label" for="language2_level">$TEXTS[level]:</label>
-  <select name="language2_level" class="selectpicker"><option value="2">$TEXTS[lang_level_2]</option><option value="3">$TEXTS[lang_level_3]</option></select>
+  <select name="language2_level" id="language2_level" class="selectpicker"><option value="2">$TEXTS[lang_level_2]</option><option value="3">$TEXTS[lang_level_3]</option></select>
+  <script>$('#language2_level').selectpicker('val', '$_POST[language2_level]');</script>
 </div>
 
 <div class="form-group$ERROR_CLASSES[language3]">
   <label class="control-label" for="language3">$TEXTS[other_language]:</label>
-  <input type="text" id="language3" data-id="language3_id" autocomplete="off" class="form-control" placeholder="$TEXTS[other_language]" name="language3" value="$POST_ENC[language3]" aria-describedby="language3_help">
+  <select name="language3_id" id="language3_id" class="selectpicker">$LANGUAGES</select>
+  <script>$('#language3_id').selectpicker('val', '$_POST[language3_id]');</script>
   $GLYPHS[language3]
-  <input type="hidden" name="language3_id" id="language3_id" value="$POST_ENC[language3_id]"/>
   </div>
 
   <div class="form-group">
   <label class="control-label" for="language3_level">$TEXTS[level]:</label>
-  <select name="language3_level" class="selectpicker"><option value="2">$TEXTS[lang_level_2]</option><option value="3">$TEXTS[lang_level_3]</option></select>
+  <select name="language3_level" id="language3_level" class="selectpicker"><option value="2">$TEXTS[lang_level_2]</option><option value="3">$TEXTS[lang_level_3]</option></select>
+  <script>$('#language3_level').selectpicker('val', '$_POST[language3_level]');</script>
 </div>
 
 <div class="form-group">
 <label class="control-label" for="host">$TEXTS[do_you_want_to_host]</label>
-  <select name="host" class="selectpicker"><option value="0" default>$TEXTS[no]</option><option value="1">$TEXTS[yes]</option></select>
+  <select name="host" id="host" class="selectpicker"><option value="0">$TEXTS[no]</option><option value="1">$TEXTS[yes]</option></select>
 </div>
+<script>
+$('#host').selectpicker('val', $_POST[host]);
+</script>
 
 <button type="submit" class="btn btn-primary">$TEXTS[register]</button>
 </form>

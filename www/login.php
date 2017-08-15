@@ -21,7 +21,6 @@ if($_POST['username'] || $_POST['password']) {
     $FORM_ERROR = $ret['message'];
   } else {
     setcookie($auth->config->cookie_name, $ret['hash'], $ret['expire'], '/');
-    echo $ret['message'];
   }
 }
 
@@ -35,7 +34,7 @@ if($FORM_ERROR || !($USERNAME || $PASSWORD )) {
   if($FORM_ERROR) {
     $ERROR_CLASS = ' has-error';
     echo ' <p class="has-error">' . htmlspecialchars($FORM_ERROR) . "</p>";
-}
+  }
 
 $TEXTS = [
   'login_intro' => htmlentities($I18N->t('login_intro')),
@@ -61,6 +60,8 @@ $TEXTS = [
 <p>$TEXTS[no_username_password] <a href="register.php">$TEXTS[click_here_to_register]</a>.</p>
 </form>
 ENDFORM;
+} else {
+  echo '<p>' . $I18N->t('login_success') . '</p>';
 }
 ?>
  <?php
