@@ -93,6 +93,7 @@ CREATE TABLE `Language` (
   `TranslationLanguage` char(2) NOT NULL DEFAULT 'en',
   `Val` varchar(255) NOT NULL DEFAULT '',
   `Priority` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `SpeechLanguage` varchar(255) NOT NULL DEFAULT 'UK English Female',
   PRIMARY KEY (`LanguageCode`,`TranslationLanguage`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -275,7 +276,7 @@ CREATE TABLE `sessions` (
   `agent` varchar(200) NOT NULL,
   `cookie_crc` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -287,4 +288,4 @@ CREATE TABLE `sessions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-15 19:51:49
+-- Dump completed on 2017-08-17 11:50:50
