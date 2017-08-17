@@ -29,6 +29,9 @@ if(($current_event = CafeEvent::current($dbh)) && $current_event->state() == 'ru
 
   $is_hosting = ($LOGIN_USER->id == $table->host_user_id);
   $time = $round->end();
+  $ending_speech = $I18N->t('voice_round_ending');
+  $ended_speech = $I18N->t('voice_round_ended');
+  $SPEECH_LANG = $I18N->speech_lang($dbh);
 
   echo <<< EOSCRIPT
 <script>
@@ -43,8 +46,9 @@ function timer_actions(remaining) {
       $('#round_ending_help').removeClass('hidden');
       $('#timer_text').addClass('text-danger');
       if(!alarmed) {
-        document.getElementById('alarm').play();
         alarmed = true;
+        document.getElementById('alarm').play();
+        responsiveVoice.speak('$ending_speech', '$SPEECH_LANG');
       }
     }
     if(remaining == 0) {
@@ -54,9 +58,11 @@ function timer_actions(remaining) {
       $('#round_ended_help').removeClass('hidden');
       $('#round_ended').removeClass('hidden');
       $('#next_table').removeClass('hidden');
-      if(!ended)
+      if(!ended) {
+        ended = true;
         document.getElementById('siren').play();
-      ended = true;
+        responsiveVoice.speak('$ended_speech', '$SPEECH_LANG');
+      }
     }
 }
 

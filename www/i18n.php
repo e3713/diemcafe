@@ -10,7 +10,9 @@ class I18N {
     'register_or_log_in' => 'Please <a href="login.php">log in</a> or <a href="register.php">register</a> to participate.',
     'no_active_event' => 'There is no currently active event. <a href="/">Click here</a> to go back to the home page.',
     'round_ending' => 'Round is ending soon',
+    'voice_round_ending' => 'The round is ending in three minutes. Please agree on your thoughts for this round and submit them to the system.',
     'round_ended' => 'Round has ended',
+    'voice_round_ended' => 'The round has now ended. If you have finished recording your thoughts, when you are ready, click the button to go to your next table.',
     'section' => 'Section',
     'round' => 'Round',
     'table' => 'Table',
@@ -81,7 +83,9 @@ class I18N {
     'register_or_log_in' => 'Por favor <a href="login.php">inicia sesion</a> o <a href="register.php">registra</a> para poder participar.',
     'no_active_event' => 'No hay event activo. <a href="/">Pulsa aqui</a> para volver a la pagina de inicio.',
     'round_ending' => 'Ronda termina pronto',
+    'voice_round_ending' => 'La ronda termina en tres minutos. Por favor, ponerse de acuerdo sobre los pensamientos de esta ronda, y grabalos en el sistema.',
     'round_ended' => 'Ronda terminada',
+    'voice_round_ended' => 'La ronda ha terminado. Se habeis terminado de grabar vuestros pensamientos, cuando quieras, haz click en el boton para ir a la siguiente mesa.',
     'section' => 'Seccion',
     'round' => 'Ronda',
     'table' => 'Mesa',
@@ -166,6 +170,19 @@ class I18N {
     $txt = $this->texts[$this->lang][$tag];
 
     return $txt ? $txt : $this->texts['en'][$tag];
+  }
+
+  public function speech_lang($dbh) {
+    // Determine speech language string based on currently configured language
+    $sth = $dbh->prepare('select SpeechLanguage from Language where LanguageCode = ?');
+    $sth->execute([$this->lang]);
+    if($row = $sth->fetch()) {
+      if($row['SpeechLanguage'])
+        return $row['SpeechLanguage'];
+    }
+
+    // Default if no language
+    return 'UK English Female';
   }
 
 }

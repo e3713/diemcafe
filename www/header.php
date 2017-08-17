@@ -30,6 +30,7 @@ if ($auth->isLogged()) {
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="vendor/bassjobsen/bootstrap-3-typeahead/bootstrap3-typeahead.js"></script>
+    <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/css/bootstrap-select.min.css">
 
