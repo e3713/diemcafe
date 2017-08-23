@@ -161,9 +161,15 @@ DIV.form-group INPUT { margin-bottom: 5px }
            <li>
              <select name="language" id="language" class="selectpicker" onchange="set_language()">
              <?php
-             $sth = $dbh->prepare('select LanguageCode, Val from Language where TranslationLanguage = ? and LanguageCode in ("en", "es")');
+             $sth = $dbh->prepare('select LanguageCode, Val from Language where TranslationLanguage = ?');
              $sth->execute([$I18N->lang]);
              $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+             if(!$rows) {
+               $sth = $dbh->prepare('select LanguageCode, Val from Language where TranslationLanguage = "en"');
+               $sth->execute([$I18N->lang]);
+               $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+             }
             foreach ($rows as $row) {
               echo '<option value="' . $row['LanguageCode'] . '"' . ($row['LanguageCode'] == $I18N->lang ? ' selected="selected"' : '') . '>' . htmlentities($row['Val']) . '</option>';
             }

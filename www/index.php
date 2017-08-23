@@ -26,7 +26,27 @@ $current_event = CafeEvent::current($dbh);
       ?>
      </div>
      <?php
-     include "help-body.php";
+     switch($I18N->lang) {
+       case 'de':
+       include "help-body-de.php";
+       break;
+
+       case 'es':
+       include "help-body-es.php";
+       break;
+
+       case 'fr':
+       include "help-body-fr.php";
+       break;
+
+       case 'it':
+       include "help-body-it.php";
+       break;
+
+       default:
+         include "help-body.php";
+     }
+
      if($current_event->state() == 'running' || $current_event->state() == 'waiting') {
         if($current_event->state() == 'running') {
           $time = $current_event->end;
