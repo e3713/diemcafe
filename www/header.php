@@ -42,6 +42,9 @@ if ($auth->isLogged()) {
       this.el = el;
       this.direction = direction;
       this.on_tick = on_tick;
+      <?php
+      echo "this.timer_delta = new Date()- new Date(" . time() * 1000 . ");\n";
+      ?>
     };
 
     function pad_zero(num, len) {
@@ -56,7 +59,7 @@ if ($auth->isLogged()) {
 
     update: function() {
       var delta;
-      delta = Math.floor((new Date(this.target_utime * 1000) - new Date()) / 1000);
+      delta = Math.floor((new Date(this.target_utime * 1000) - new Date() + this.timer_delta) / 1000);
       if(this.direction == 'up')
         delta = -delta;
 
