@@ -50,6 +50,7 @@ class CafeUser {
 		return NULL;
 	}
 
+	// This gets the previous conversation for the current user. What's actually used in the UI is the previous conversation for the current *table*, ie for the *host* of the current table - who is also a user, of course. See table.php.
 	public function previous_conversation($current_conversation) {
 		$round = new CafeRound($this->dbh, $current_conversation->round_id);
 		$previous_round = $round->previous();

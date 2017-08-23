@@ -24,6 +24,8 @@ if(($current_event = CafeEvent::current($dbh)) && $current_event->state() == 'ru
   // SECURITY: check that current user is actually attached to this conversation. If not, bail.
   $conversation = new CafeConversation($dbh, intval($_GET['id']));
   $table = $conversation->table();
+  // Get the previous conversation for the host of this table - this is for the purpose of listing the previous thoughts for this table.
+  $previous_conversation = $table->host()->previous_conversation($conversation);
   $round = $conversation->round();
   $section = $round->section();
 
@@ -206,6 +208,20 @@ EOZOOM;
 
   echo '<div class="row">' . $I18N->t('thoughts_help') . '</div>';
 
+  echo '<div class="col-xs-6">';
+  echo '<h3>Previous thoughts</h3>';
+  echo '<table class="table table-striped">';
+  if($previous_conversation) {
+    $thoughts = $previous_conversation->thoughts();
+    foreach ($thoughts as $thought) {
+      echo '<tr><td>' . htmlentities($thought->text) . '</td></tr>';
+    }
+  }
+  echo '</table>';
+  echo '</div>';
+
+  echo '<div class="col-xs-6">';
+  echo '<h3>Thoughts for this round</h3>';
   // Thought submission controls
   echo '<div class="row' . (count($thoughts) >= 5 ? ' hidden' : '' ) . '" id="submit_thoughts">';
   echo '<div class="form-group">';
@@ -221,6 +237,7 @@ EOZOOM;
     echo '<tr><td>' . htmlentities($thought->text) . '</td></tr>';
   }
   echo '</table>';
+  echo '</div>';
 
   echo '</div>'; // controls
 
