@@ -50,7 +50,7 @@ class I18N {
     'registration_confirmation' => "You have successfully registered. Please re-read the instructions on the <a href=\"/\">home page</a> and <b>make sure you're logged in</b> before the event starts.",
     'password_repeat' => 'Password (repeat)',
     'city_of_residence' => 'City of residence',
-    'other_language' => 'Other language',
+    'other_languages_you_are_comfortable_with' => 'Other languages you are comfortable with',
     'level' => 'Level', // as in level speaking language
     'lang_level_2' => 'Comfortable speaking',
     'lang_level_3' => 'Only if no other option',
@@ -123,7 +123,7 @@ class I18N {
     'registration_confirmation' => "Has registrado con exito. Por favor lee otra vez las instrucciones en la <a href=\"/\">pagina de inicio</a> y <b>asegurate de iniciar sesion antes del comienzo del evento.",
     'password_repeat' => 'Clave (repetir)',
     'city_of_residence' => 'Ciudad de residencia',
-    'other_language' => 'Otro idioma',
+    'other_languages_you_are_comfortable_with' => 'Otros idiomas en los que te sientes comodo hablando',
     'level' => 'Level', // as in level speaking language
     'lang_level_2' => 'Comodo hablando',
     'lang_level_3' => 'Solo si no hay otra opcion',

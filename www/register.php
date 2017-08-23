@@ -52,18 +52,18 @@ if(count($_POST)) {
 
       // Store main User data
       $sth = $dbh->prepare('update User set Name = ?, CountryCode = ?, City = ?, Host = ? where id = ?');
-      $sth->execute([$_POST['name'], $_POST['country_id'], $_POST['city'], $_POST['HOST'], $user_id]);
+      $sth->execute([$_POST['name'], $_POST['country_id'], $_POST['city'], $_POST['host'], $user_id]);
 
       // Store language details
       $sth = $dbh->prepare('insert into UserLanguage (UserID, LevelID, LanguageCode) values(?, ?, ?)');
       // First language is always native
       $sth->execute([$user_id, 1, $_POST['language1_id']]);
-      // Second language
+      // Second language - hardcoded as 'comfortable speaking'
       if($_POST['language2_id'])
-        $sth->execute([$user_id, $_POST['language2_level'], $_POST['language2_id']]);
-      // Third language
+        $sth->execute([$user_id, 2, $_POST['language2_id']]);
+      // Third language - hardcoded as 'comfortable speaking'
       if($_POST['language3_id'])
-        $sth->execute([$user_id, $_POST['language3_level'], $_POST['language3_id']]);
+        $sth->execute([$user_id, 2, $_POST['language3_id']]);
 
       // Done creating user. Report success.
       echo '<p>' . $I18N->t('registration_confirmation') . '</p>';
@@ -185,7 +185,7 @@ if(count($VALIDATION_ERRORS) || !count($_POST)) {
     'country_of_residence' => htmlentities($I18N->t('country_of_residence')),
     'city_of_residence' => htmlentities($I18N->t('city_of_residence')),
     'native_language' => htmlentities($I18N->t('native_language')),
-    'other_language' => htmlentities($I18N->t('other_language')),
+    'other_languages_you_are_comfortable_with' => htmlentities($I18N->t('other_languages_you_are_comfortable_with')),
     'level' => htmlentities($I18N->t('level')),
     'lang_level_2' => htmlentities($I18N->t('lang_level_2')),
     'lang_level_3' => htmlentities($I18N->t('lang_level_3')),
@@ -250,30 +250,14 @@ echo <<<ENDFORM
 </div>
 
 <div class="form-group$ERROR_CLASSES[language2]">
-  <label class="control-label" for="language2">$TEXTS[other_language]:</label>
+  <label class="control-label" for="language2">$TEXTS[other_languages_you_are_comfortable_with]:</label>
   <select name="language2_id" id="language2_id" class="selectpicker">$LANGUAGES</select>
   <script>$('#language2_id').selectpicker('val', '$_POST[language2_id]');</script>
   $GLYPHS[language2]
-  </div>
-
-  <div class="form-group">
-  <label class="control-label" for="language2_level">$TEXTS[level]:</label>
-  <select name="language2_level" id="language2_level" class="selectpicker"><option value="2">$TEXTS[lang_level_2]</option><option value="3">$TEXTS[lang_level_3]</option></select>
-  <script>$('#language2_level').selectpicker('val', '$_POST[language2_level]');</script>
-</div>
-
-<div class="form-group$ERROR_CLASSES[language3]">
-  <label class="control-label" for="language3">$TEXTS[other_language]:</label>
   <select name="language3_id" id="language3_id" class="selectpicker">$LANGUAGES</select>
   <script>$('#language3_id').selectpicker('val', '$_POST[language3_id]');</script>
   $GLYPHS[language3]
   </div>
-
-  <div class="form-group">
-  <label class="control-label" for="language3_level">$TEXTS[level]:</label>
-  <select name="language3_level" id="language3_level" class="selectpicker"><option value="2">$TEXTS[lang_level_2]</option><option value="3">$TEXTS[lang_level_3]</option></select>
-  <script>$('#language3_level').selectpicker('val', '$_POST[language3_level]');</script>
-</div>
 
 <div class="form-group">
 <label class="control-label" for="host">$TEXTS[do_you_want_to_host]</label>
