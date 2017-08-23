@@ -2,7 +2,7 @@
 <div class="jumbotron jumbotron-alt">
            <h1>What is DiEM Caf&eacute;?</h1>
  <p>We would like to invite you to take part in a completely new debating experience in DiEM25, an online World Caf&eacute;. This debate methodology has a very long and successful track record and is well documented <a href="http://www.theworldcafe.com/">here</a> and elsewhere.</p>
-<p>We are creating a website which we would like to call the DiEM Café, a sort of newcd di public space which we hope will be used many times again in the future.</p>
+<p>We are creating a website which we would like to call the DiEM Café, a sort of new public space which we hope will be used many times again in the future.</p>
  <p>Before we get into details, note that we need many volunteers to become <i>hosts</i>. Being a host is very easy: the role and responsibilities of hosts are described <a href="#host">here</a>. Please volunteer if you want to make this amazing experiment possible. Should we have more host volunteers than are actually needed, the final hosts will be chosen randomly by the web app.</p>
          </div>
          <div class="jumbotron">
