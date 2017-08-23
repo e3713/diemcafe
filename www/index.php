@@ -11,6 +11,7 @@ $current_event = CafeEvent::current($dbh);
         case 'waiting':
           echo '<p>' . $I18N->t('next_event') . ': ' . htmlentities($current_event->name) . '</p>';
           echo '<p>' . $I18N->t('time_remaining') . ': <span id="timer"></span></p>';
+          echo '<p><a href="register.php">' . $I18N->t('click_here_to_register') . '</a>.</p>';
           echo '<p class="hidden" id="overview_link"><a href="eventoverview.php">' . $I18N->t('click_here_to_participate') . '</a>.</p>';
           break;
         case 'running':
@@ -39,7 +40,7 @@ $current_event = CafeEvent::current($dbh);
         echo <<< EOTIMER
      <script>
      var overview_link_revealed = false;
-     
+
      function timer_actions(remaining) {
         if(remaining == 0 && !overview_link_revealed) {
           // Waiting event and timer has gone to zero - reveal event overview link.

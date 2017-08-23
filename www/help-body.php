@@ -25,7 +25,7 @@
        <a name="register"></a>
 <div class="jumbotron jumbotron-alt">
          <h2>Registration</h2>
-         <p>Please register in advance, the sooner the better for the organisation. We need your email address to contact you, your name for the people who are going to talk to you and your language preferences (please see this important <a href="#language">note</a> about language). We also need to know if you volunteer to host a table, it is really easy and VERY important. Please click here for details.</p>
+         <p>Please register in advance, the sooner the better for the organisation. We need your email address to contact you, your name for the people who are going to talk to you and your language preferences (please see this important <a href="#language">note</a> about language). We also need to know if you volunteer to host a table, it is really easy and VERY important. Please <a href="register.php">click here</a> for details.</p>
          <a href="#top">Back to top</a>
        </div>
 
