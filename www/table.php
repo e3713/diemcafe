@@ -179,7 +179,6 @@ EOZOOM;
   echo '<thead><tr>';
   echo '<th>' . $I18N->t('name') . '</th>';
   echo '<th>' . $I18N->t('country'). '</th>';
-  echo '<th>DSC</th>';
   echo '<th>' . $I18N->t('city') . '</th>';
   echo '</tr></thead>';
 
@@ -189,7 +188,6 @@ EOZOOM;
     echo '<tr>';
     echo '<td>' . htmlentities($user->name) . '</td>';
     echo '<td>' . htmlentities($user->country($I18N->lang)->name) . '</td>';
-    echo '<td>' . htmlentities($user->dsc) . '</td>';
     echo '<td>' . htmlentities($user->city) . '</td>';
     echo '</tr>';
   }

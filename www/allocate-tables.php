@@ -28,10 +28,10 @@ if($current_event) {
 <form method="post" action="" >
   <div class="form-group">
     <label class="control-label" for="max_users_per_table">Max users per table:</label>
-    <input type="text" class="form-control" length="3" placeholder="Max users per table" name="max_users_per_table" value="" aria-describedby="max_users_per_table_help">
+    <!-- <input type="text" class="form-control" length="3" placeholder="Max users per table" name="max_users_per_table" value="" aria-describedby="max_users_per_table_help">-->
   </div>
 
-<button type="submit" class="btn btn-primary" name="run" value="1">Allocate Conversations</button>
+<button type="submit" class="btn btn-primary" name="run" value="1">Allocate Tables</button>
 </form>
 
 <?php

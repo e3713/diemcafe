@@ -298,6 +298,26 @@ class CafeEvent {
 			return new CafeRound($this->dbh, $row['RoundID']);
 	}
 
+	public function num_rounds() {
+		$sth = $this->dbh->prepare('select count(*) as C from Event inner join Section on Section.EventID = Event.EventID inner join Round on Round.SectionID = Section.SectionID where Event.EventID = ?');
+		$sth->execute([$this->id]);
+		$row = $sth->fetch();
+		return $row['C'];
+	}
+
+	// Get nth round - base zero
+	public function nth_round($n) {
+		// Get a list of round IDs, ordered by Section.SectionNumber then Round.RoundNumber
+		$sth = $this->dbh->prepare('select Round.RoundID from Event inner join Section on Section.EventID = Event.EventID inner join Round on Round.SectionID = Section.SectionID where Event.EventID = ? order by Section.SectionNumber, Round.RoundNumber limit ' . $n . ', 1');
+		$sth->execute([$this->id]);
+		$row = $sth->fetch();
+		if(!$row)
+			return NULL;
+
+		return new CafeRound($this->dbh, $row['RoundID']);
+	}
+
+
 
 	/* Return list of event sections */
 	public function sections() {
@@ -334,12 +354,12 @@ class CafeEvent {
 	}
 
 // Interim algorithm that allocates users at random
-	public function allocate_conversations($max_users_per_table) {
+	public function allocate_conversations_RANDOM($max_users_per_table) {
 
 		// Delete any existing table/conversation setup
 		$this->reset();
 
-		$users = CafeUser::enumerate($this->dbh, true); // User logged-in users only
+		$users = CafeUser::enumerate($this->dbh, true); // Use logged-in users only
 
 		// Number of tables = number of users / max users per table, rounded up
 		$num_tables = ceil(CafeUser::count($this->dbh, true) / $max_users_per_table);
@@ -502,6 +522,79 @@ class CafeEvent {
 					} // next $round
 				} // next $section
 				return $unallocated_users;
+			}
+
+			// ARN: $max_users_per_table is not used here as this is hardcoded in Miguel's code.
+			public function allocate_conversations($max_users_per_table) {
+				$this->reset();
+				/***Create object Cafe with parameters Session Id and rounds number***/
+				/* ARN: session ID appears not to be used. Passing Event ID here. */
+				$Diem = new Cafe($this->id, $this->num_rounds());
+
+
+				/***Add users to the array using Cafe::addClient(1,2,3,4,5) method***
+				*** 1-> array() containing languages (each element of the array corresponds to a language)***
+				*** 2-> str() city ***
+				*** 3-> str() dsc ***
+				*** 4-> bool() Host ***
+				*** 5-> str() User_ID ***/
+				$users = CafeUser::enumerate($this->dbh, true); // Use logged-in users only
+
+				foreach($users as $user)
+				{
+					$languages = array();
+					foreach($user->languages as $lang) {
+						array_push($languages, $lang['LanguageCode']);
+					}
+					$Diem->addClient($user->id, $languages, $user->city, $user->dsc, $user->host);
+				}
+
+				/*** Invoke Cafe::generate_host_list() method (No parameters required)***/
+				$Diem->generate_host_list();
+
+				$miguel_tables_to_adam_tables = array();
+
+				/***From now on all users are asigned to a table for each round***
+				***Next loops show how to get every single user_id ($client_id) from each table ($table->getTable())****
+				*** The first user on each table is always the host ***/
+				foreach($Diem->getRounds() as $round_no => $round)
+				{
+					echo "===================================================================<br/>";
+					echo "Session: " . $Diem->getSession() . " // Round: " . $round_no . "<br/>";
+					foreach ($round as $key => $group)
+					{
+						$adam_round = $this->nth_round($round_no);
+
+						foreach ($group as $table)
+						{
+							$table_id = $table->getTable();
+							echo "Table ID: " . $table->getTable() . "<br/>";
+							$host = $table->getChairs()[0];
+							// Extract language from table ID (from Miguel's code)
+							$lang = substr($table->getTable(), -2, 2);
+							if($miguel_tables_to_adam_tables[$table_id]) {
+								$adam_table = $miguel_tables_to_adam_tables[$table_id];
+							} else {
+								$adam_table = CafeTable::create($this->dbh, $this->id, $host, $lang);
+								$miguel_tables_to_adam_tables[$table_id] = $adam_table;
+							}
+							echo "Host ID: " . $table->getChairs()[0] . "<br/>";
+
+							// Create a corresponding conversation
+							$conversation = CafeConversation::create($this->dbh, $adam_round->id, $adam_table->id);
+							//print_r($table->getChairs()[0]);
+							foreach ($table->getChairs() as $key => $client_id)
+							{
+								// Add user to conversation - including the table host.
+								$user = new CafeUser($this->dbh, $client_id);
+								$user->attach_to_conversation($conversation);
+								if ($key > 0)
+									echo "Client " . $key . " ID: " . $client_id . "<br/>";
+							}
+							echo "---------------------------------------------------" . "<br/>";
+						}
+					}
+				}
 			}
 }
 
@@ -866,5 +959,10 @@ class CafeLanguage {
 	}
 
 }
+
+// Miguel Gonzalez code + adapter to objects in this file.
+
+include "table-allocation.php";
+
 
  ?>
