@@ -1,123 +1,125 @@
 <a name="top"></a>
 <div class="jumbotron jumbotron-alt">
-           <h1>What is DiEM Caf&eacute;?</h1>
- <p>We would like to invite you to take part in a completely new debating experience in DiEM25, an online World Caf&eacute;. This debate methodology has a very long and successful track record and is well documented <a href="http://www.theworldcafe.com/">here</a> and elsewhere.</p>
-<p>We are creating a website which we would like to call the DiEM Café, a sort of newcd di public space which we hope will be used many times again in the future.</p>
- <p>Before we get into details, note that we need many volunteers to become <i>hosts</i>. Being a host is very easy: the role and responsibilities of hosts are described <a href="#host">here</a>. Please volunteer if you want to make this amazing experiment possible. Should we have more host volunteers than are actually needed, the final hosts will be chosen randomly by the web app.</p>
+           <h1>Was ist DiEM Caf&eacute;?</h1>
+ <p>Wir w&uuml;rden euch sehr gerne zur Teilnahme an einer v&ouml;llig neuen Diskussions-Erfahrung in DiEM25 einladen, einem Online World Caf&eacute;. Diese Gespr&auml;chsmethode blickt bereits auf eine lange und erfolgreiche Geschichte zur&uuml;ck und wurde <a href="http://www.theworldcafe.com/">hier</a> und anderswo bestens dokumentiert.</p>
+<p>Wir sind im Begriff eine Website zu entwickeln, die wir gerne DiEM Caf&eacute; nennen w&uuml;rden. Sie ist als eine Art <b>&ouml;ffentlicher Raum</b> innerhalb DiEM25s geplant, welcher auch in Zukunft genutzt werden kann.</p>
+ <p>Bevor es an die Details geht, m&ouml;chten wir auf folgendes hinweisen: Wir sind darauf angewiesen, dass sich unter den Teilnehmern viele freiwillig als <b>Gastgeber</b> melden. Gastgeber sein ist im DiEM Caf&eacute; sehr einfach: Eine Beschreibung der Rolle und der Verantwortung eines Gastgebers findet ihr <a href="#host">hier</a>. Bitte meldet euch daf&uuml;r, um dieses einzigartige Experiment m&ouml;glich zu machen. Sollten sich mehr Freiwillige melden, als n&ouml;tig w&auml;re, werden die Gastgeber mit Hilfe eines Zufallsgenerators ausgew&auml;hlt.</p>
          </div>
          <div class="jumbotron">
-           <h2>Taking part</h2>
-           <p>Taking part in the World Caf&eacute; is very easy:
+           <h2>Mach mit</h2>
+           <p>Die Teilnahme am DiEM Caf&eacute; ist sehr einfach:
              <ol>
-           <li><a href="#register">Register</a> in advance</li>
-           <li><a href="#login">Log in</a> 10 minutes before the event starts</li>
-           <li><a href="#table">Click the button</a> to go to your first table</li>
-           <li><a href="#section">During each section</a> a set of questions will be discussed in many tables at a time, for several <a data-slide-to="6">rounds</a>.</li>
-           <li>Questions are assigned randomly.</li>
-           <li>Please observe the DiEM Caf&eacute; <a href="etiquette">etiquette</a>.</li>
-           <li>Take <b>very short</b> <a href="notes">notes</a>.</li>
-           <li>Move to the next table at the end of each round.</li>
-           <li>You will automatically be notified of the results after the caf&eacute;, when they are ready.</li>
+           <li><a href="#register">Registriert</a> euch im Voraus.</li>
+           <li><a href="#login">Meldet euch</a> 10 Minuten vor Beginn des Events an.</li>
+           <li>Dr&uuml;ckt den Knopf, um dem ersten <a href="#table">Tisch</a> beizutreten.</li>
+           <li>W&auml;hrend jedes <a href="#section">Sektionen</a> wird eine Anzahl Fragen an vielen Tischen gleichzeitig und &uuml;ber mehrere <a data-slide-to="6">Runden</a> hinweg diskutiert.</li>
+           <li>Die Fragen werden zuf&auml;llig zugeteilt.</li>
+           <li>Bitte beachtet die DiEM Caf&eacute; <a href="etiquette">Etikette</a>.</li>
+           <li>Schreibt <b>sehr kurze</b> <a href="notes">Notizen</a>.</li>
+           <li>Wechselt am Ende jeder Runde zum n&auml;chsten Tisch.</li>
+           <li>Die Ergebnisse des Caf&eacute;s werden euch, sobald sie vorliegen, automatisch zugesandt.</li>
          </ol>
-         <a href="#top">Back to top</a>
+         <a href="#top">Zur&uuml;ck</a>
        </div>
 
        <a name="register"></a>
 <div class="jumbotron jumbotron-alt">
          <h2>Registration</h2>
-         <p>Please register in advance, the sooner the better for the organisation. We need your email address to contact you, your name for the people who are going to talk to you and your language preferences (please see this important <a href="#language">note</a> about language). We also need to know if you volunteer to host a table, it is really easy and VERY important. Please <a href="register.php">click here</a> for details.</p>
-         <a href="#top">Back to top</a>
+         <p>Bitte meldet euch im Voraus an, je fr&uuml;her desto besser f&uuml;r die Organisation. Wir ben&ouml;tigen eure Email-Adresse, um euch zu kontaktieren, euren Namen f&uuml;r die Menschen, mit denen ihr sprechen werdet und eure Sprach-Pr&auml;ferenzen (bittet beachtet daf&uuml;r diesen wichtigen <a href="#language">Hinweis</a>). Wir w&uuml;ssten au&szlig;erdem gerne ob ihr euch als Gastgeber zur Verf&uuml;gung stellen w&uuml;rdet. Dies ist, wie bereits erw&auml;hnt, wirklich sehr einfach und SEHR wichtig. Details gibt es
+           <a href="register.php">click hier</a>.</p>
+         <a href="#top">Zur&uuml;ck</a>
        </div>
 
        <a name="login"></a>
 <div class="jumbotron">
-         <h2>Login</h2>
-           <p>You can take part in the conversation if you log in <b>10 minutes</b> before the event. Once you log in you will see the programme for the event with the questions to be discussed and precise times. If you need to leave the event, please log out so your table companions are not left alone.</p>
-           <a href="#top">Back to top</a>
+         <h2>Anmelden</h2>
+           <p>Ihr k&ouml;nnt an dem Gespr&auml;ch teilnehmen, wenn ihr euch <b>10 Minuten</b> vor Beginn des Caf&eacute;s anmeldet. Wenn ihr euch angemeldet habt, seht ihr das Programm f&uuml;r das Caf&eacute; mit den Fragen, die diskutiert werden sollen, und den jeweiligen Zeiten. Solltet ihr das Caf&eacute; verlassen m&uuml;ssen, meldet euch bitte ab, damit die anderen Teilnehmer an eurem Tisch nicht alleine bleiben.
+           <a href="#top">Zur&uuml;ck</a>
         </div>
         <a name="zoom"></a>
 <div class="jumbotron jumbotron-alt">
           <h2>Zoom</h2>
-          <p>Zoom is a videoconferencing tool which will be used for the DiEM25 Caf&eacute;. You need to download it in advance and test it with a friend if possible, to avoid sound issues.</p>
-<p>You can download the Zoom Client for Meetings <a href="https://zoom.us/download" target="_blank">here</a>. It's available for most operating systems on PCs and mobile devices and as browser plugin for Chrome and Firefox. (For installation under Linux please see <a href="https://support.zoom.us/hc/en-us/articles/204206269-Linux-Installation" target="_blank">here</a>.)</p>
-<p>Once you have zoom installed, clicking on the &ldquo;Join&rdquo; link from a <a href="#table">table</a> will launch Zoom and take you to the meeting.</p>
+          <p>Ist ein Programm f&uuml;r  Video-Konferenzen, das f&uuml;r das DiEM Cafe genutzt wird. Du solltest es im Voraus herunterladen und, wenn m&ouml;glich, mit Freunden testen, Tonprobleme zu vermeiden.</p>
+<p>Du kannst Zoom von  <a href="https://zoom.us/download" target="_blank">here</a>. herunterladen. Verf&uuml;gbar sind Versionen f&uuml;r die meisten Betriebssysteme und Browser-Plugins f&uuml;r Chrome und Firefox. (F&uuml;r die Installation unter Linux siehe <a href="https://support.zoom.us/hc/en-us/articles/204206269-Linux-Installation" target="_blank">hier</a>.)</p>
+<p>Wenn du nicht Gastgeber eines Tisches bist, brauchst du nichts weiter zu tun als Zoom zu installieren. Der Gastgeber wird eine Video-Konferenz er&ouml;ffnen und einen Einladungslink generieren. Du musst nur auf den, auf der Tisch-Seite geteilten, Link klicken und wirst automatisch der Konferenz beitreten. </p>
 
-<p>To become the host of a new meeting you need to click on &ldquo;sign in&rdquo; and generate an account (or connect to a social network). After signing in, another window opens where you click on &ldquo;Start with video&rdquo; to start a new meeting. The meeting window will open and zoom should automatically recognise your camera and microphone settings. Post the link to the meeting in the table tab so the other participants can click &ldquo;Join&rdquo; to join the meeting.</p>
-<a href="#top">Back to top</a>
+<p>Um Gastgeber einer neuen Konferenz zu werden, musst du zun&auml;chst Zoom starten und &uuml;ber "sign in" ein Benutzerkonto erstellen (oder dich &uuml;ber ein soziales Netzwerk anmelden). Nachdem du dich angemeldet hast, &ouml;ffnet sich ein weiteres Fenster in welchem du durch klicken auf "Start with video" eine neue Video Konferenz starten kannst. Click um &ldquo;Invite&rdquo;, click um &ldquo;Copy Link&rdquo; un f&uuml;ge ins Tisch ein so andere Teilnemer beitretten k&ouml;nnen.</p>
+
+<a href="#top">Zur&uuml;ck</a>
         </div>
         <a name="section"></a>
 <div class="jumbotron">
-          <h2>Sections</h2>
-          <p>The event is divided into sections. During each section the same question or set of questions is discussed at many tables at the same time, for several (normally three) <a href="#round">rounds</a>. There will be a break between sections and shorter breaks between rounds to give a chance for hosts to prepare the next round and for everyone to stretch their legs.</p>
-          <a href="#top">Back to top</a>
+          <h2>Sektion</h2>
+          <p>Das Event ist in mehrere Sektionen unterteilt. W&auml;hrend jeder Sektion werden die gleichen Fragen bzw. das gleiche Fragen-B&uuml;ndel an allen Tischen gleichzeitig diskutiert und dies f&uuml;r mehrere (&uuml;blicherweise drei) Runden. Es wird einen Pause zwischen den Sektionen geben und k&uuml;rzere zwischen den Runden, um dem Gastgeber die M&ouml;glichkeit zu geben die n&auml;chste Runde vorzubereiten und allen die Gelegenheit ihre Beine auszustrecken.</p>
+          <a href="#top">Zur&uuml;ck</a>
         </div>
 
         <a name="round"></a>
 <div class="jumbotron jumbotron-alt">
-          <h2>Rounds</h2>
-          <p>A round of discussion is a 22 minute period during which all groups discuss around their tables, in the same Zoom conference, a question which will be displayed on the screen. At the end of the round there will be a tone to let you know that time is up. Starting then you have three extra minutes before the pad gets locked.</p>
-          <a href="#top">Back to top</a>
+          <h2>Runde</h2>
+          <p>W&auml;hrend der Diskussionsrunden, die jeweils 25 Minuten lang sind, diskutieren alle Gruppen an ihren jeweiligen Tischen, in der gleichen Zoom-Konferenz, die Frage, die auf der Tisch-Seite angezeigt wird. F&uuml;nf Minuten vor Ende der Runde wird ein Ton erklingen, der euch anzeigt, dass die Zeit  beinahe um ist und ihr eure Gedanken notiert haben solltet bevor sie abgelaufen ist.</p>
+          <a href="#top">Zur&uuml;ck</a>
         </div>
         <a name="table"></a>
 <div class="jumbotron">
-          <h2>Tables</h2>
-          <p>A café table is a virtual place where the same question is discussed for several rounds by different groups of people. Only the host remains at the same table and the same language will be used for all rounds in a section.</p>
+          <h2>Tisch</h2>
+          <p>Ein Caf&eacute;-Tisch ist, in unserem Fall, ein virtueller Raum in dem pro Runde stets die gleiche Frage diskutiert wird. Die Besetzung des Tische wechselt jedoch jede Runde und  nur der Gastgeber und die gesprochene Sprache bleiben &uuml;ber die gesamte Sektion bestehen.</p>
 
-<p>Once you click the button to go to your first table, you will see the table screen. There, when the host is ready, you will find the link to the Zoom video conference. Click Join and if that doesn’t work paste the link in a new tab. We recommend <b>not</b> closing the tabs until the end of the event, and certainly not until the round is finished.</p>
+<p>Sobald das Event startet (oder eine Runde endet), wird eine neue Schaltfl&auml;che in deinem Browser erscheinen und dich zu deinem n&auml;chsten Tisch f&uuml;hren. Dort wirst du, sobald der Gastgeber alles vorbereitet hat, den Link f&uuml;r die Zoom-Konferenz finden. Klicke auf Join, oder - wenn das nicht funktioniert - kopiere den Link in einen neuen Browser-Tab. Wir empfehlen diese Tabs <b>nicht</b> zu schlie&szlig;en bevor das Event vor&uuml;ber ist und in keinem Fall vor dem Ende der Runde.</p>
 
-<p>In the table screen you will see, on the left hand side, the summary of the notes from the previous round, a list of the users invited to the table, and, on the right hand side, an empty space for notes. Please read about <a href="#notes">notes</a> before you use it. At the end of each round the pad will contain the most important thoughts, or ideas discussed.</p>
-<a href="#top">Back to top</a>
+<p>Im Tabellenbild sehen Sie auf der linken Seite die Zusammenfassung der Noten aus der vorherigen Runde, eine Liste der Benutzer, die zum Tisch eingeladen wurden, und auf der rechten Seite einen leeren Platz f&uuml;r Notizen. Bitte lesen Sie &uuml;ber <a href="#notes"> Notizen </a>, bevor Sie es verwenden. Am Ende jeder Runde wird das Pad die wichtigsten Gedanken enthalten oder Ideen diskutiert.</p>
+<a href="#top">Zur&uuml;ck</a>
       </div>
 <a name="notes"></a>
 <div class="jumbotron jumbotron-alt">
-  <h2>Notes</h2>
-  <p>This discussion must produce a tangible result for us to have a better understanding of our common or diverging points of view. In order to make information manageable, notes should have a maximum length of 140 characters, and a pad will be full once 5 notes have been submitted.</p>
+  <h2>Notizen/Gedanken</h2>
+  <p>Jede Diskussionsrunde sollte verwertbare Ergebnisse produzieren, um die gemeinsamen oder abweichenden Meinungen besser verstehen zu k&ouml;nnen. Um die Ergebnisse aller Tische verwerten zu k&ouml;nnen, sollten die Notizen nicht l&auml;nger als 140 Zeichen sein und das gesamte Pad nicht mehr als f&uuml;nf Notizen enthalten.</p>
 
-<p>Notes cannot be deleted, and they should reflect the most important issues, ideas or conclusions discussed, so, please take a minute before you click &ldquo;Share&rdquo;. We invite you to discuss the notes in the Zoom chat before you actually share them in the table pad. Once the time is up, the pad will be locked - time to move to the next table.</p>
-<a href="#top">Back to top</a>
+<p>Notizen k&ouml;nnen nicht gel&ouml;scht werden und sollten die wichtigsten Punkte und Schlussfolgerungen enthalten. Nehmt euch daher bitte ein paar Minuten bevor ihr auf “Share” klickt. Wir empfehlen euch die Notizen zun&auml;chst &uuml;ber Zoom zu besprechen, bevor sie wirklich ins Pad geschrieben werden. Sobald die Zeit abgelaufen ist, wird das Pad versiegelt. Es ist dann Zeit zum n&auml;chsten Tisch weiter zu gehen.</p>
+<a href="#top">Zur&uuml;ck</a>
   </div>
 <a name="language"></a>
 <div class="jumbotron">
-  <h2>Language</h2>
-  <p>Our intention is to be as inclusive as possible. Many people speak only their mother tongue, and those people will take priority at the time of assigning discussion tables. However, if there are very few monolingual people from a language which is not widely spoken, like Esperanto, they may find they do not meet people from other nationalities or cultures. This is unfortunate but unavoidable.</p>
+  <h2>Sprache</h2>
+  <p>Unsere Intention ist es so inklusive wie m&ouml;glich zu sein. Viele Leute sprechen nur ihre Muttersprache und diese werden bei der Einteilung der Tische bevorzugt. Dennoch, wenn es sehr Wenige gibt, die nur eine, wom&ouml;glich seltene Sprache, wie z.B. Esperanto, sprechen, werden diese vielleicht nie auf Vertreter anderer Kulturen oder Nationalit&auml;ten treffen. Dies tut uns sehr leid, aber wir wissen leider nicht, wie wir das &auml;ndern k&ouml;nnten.
+</p>
 
-<p>If you are comfortable with more than one language, do not be shy, particularly if it is a less spoken one. Your language skills will help to create an interesting mix and make the DiEM Café a truly pan-European experience.</p>
-<a href="#top">Back to top</a>
+<p>Wenn du mehr als eine Sprache sprichst, sei nicht sch&uuml;chtern, besonders wenn es eine wenig gesprochene Sprache ist. Deine Sprachkenntnisse werden dabei helfen, interessante Gruppierungen zu erm&ouml;glichen und das DiEM Caf&eacute; zu einer wahrhaft europ&auml;ischen Erfahrung zu machen.</p>
+<a href="#top">Zur&uuml;ck</a>
   </div>
   <a name="host"></a>
 <div class="jumbotron jumbotron-alt">
-    <h2>Hosting a table</h2>
-<p>We need a tiny bit of help from you. The DiEM Café is a platform which depends on users to do part of the work. Very little, it is true, but essential. Each Café table consists of a browser tab from the DiEM Café site and a Zoom video conference screen. At each table one user will be the &ldquo;table host&rdquo;, who is responsible for creating the conference and posting the meeting ID in the table tab.
-Additionally we ask the table host to add the relevant information to the pad in the wrap up time if other users have not done so.</p>
-<p>The table host is not necessarily a moderator, however she or he has a few simple tasks to do which are described in the <a href="#etiquette">table etiquette</a>.</p>
-<a href="#top">Back to top</a>
+    <h2>Gastgeber Informationen</h2>
+<p>Wir brauchen ein klein wenig Hilfe von euch. Das DiEM Caf&eacute; ist eine Plattform, die auf die Mithilfe einiger Nutzer angewiesen ist. Diese Mithilfe ist sehr wenig, aber sehr wichtig. Jeder Caf&eacute;-Tisch besteht aus einem Browser Tab der DiEM Caf&eacute; Webseite und einem Fenster mit der Zoom Video-Konferenz. Jeder Tisch hat einen Benutzer, der als  &ldquo;Gastgeber&rdquo; fungiert. Dessen Hauptaufgabe ist es die Konferenz zu starten und die Konferenz-ID auf der Tisch-Seite einzutragen.</p>
+<p>Der Gastgeber ist nicht zwangsl&auml;ufig ModeratorIn, hat jedoch einige wenige, einfache Aufgaben, die in <a href="#etiquette">Etikette</a> erkl&auml;rt sind.</p>
+<a href="#top">Zur&uuml;ck</a>
   </div>
   <a name="etiquette"></a>
 <div class="jumbotron">
-    <h2>Etiquette</h2>
-<p>The DiEM Café is, above all, about sharing without concerns our views with other DiEM25 members. A cooperative, constructive and relaxed atmosphere is what we should strive for. We propose a very basic <a href="#conduct">code of conduct</a>.</p>
+    <h2>Etikette</h2>
+<p>Im DiEM Caf&eacute; geht es, vor allem anderen, darum unsere Ansichten &uuml;ber das Diskussionsthema mit anderen DiEM25 Mitgliedern zu teilen und offen und frei zu diskutieren. Daher streben wir eine kooperative, konstruktive und entspannte Atmosph&auml;re an. Wir schlagen daher einen sehr einfachen <a href="#conduct">Verhaltenskodex</a>.</p>
 <p>To use time most effectively we suggest the following order:</p>
 <ol>
-  <li>The debate may start as soon as everyone is present.</li>
-<li>The host asks if people want the session to be spontaneous or moderated.</li>
-<li>If necessary a moderator is appointed.</li>
-<li>A short introduction of all the table members.</li>
-<li>The host will quickly run through the results from the previous session (2 minutes max.)</li>
-<li>Debate of the question.</li>
-<li>Notes are taken as described.</li>
-<li>Enjoy the conversation and come back to the next event.</li>
+  <li>Kurze Vorstellung aller Teilnehmer am Tisch.</li>
+<li>Der Gastgeber stellt kurz die Ergebnisse der vorangegangenen Runde vor (2 minutes max.).</li>
+<li>Der Gastgeber fragt, ob die Teilnehmer eine Moderation haben m&ouml;chten oder nicht.</li>
+<li>Wenn n&ouml;tig wird ein/e ModeratorIn bestimmt.</li>
+<li>Dann beginnt die Diskussion &uuml;ber die gestellten Fragen.</li>
+<li>Notizen werden wie beschreiben angefertigt.</li>
+<li>Viel Spa&szlig; an den Diskussionen und kommt zum n&auml;chsten Event wieder!</li>
 </ol>
-<a href="#top">Back to top</a>
+<a href="#top">Zur&uuml;ck</a>
 </div>
 
 <a name="conduct"></a>
 <div class="jumbotron jumbotron-alt">
-  <h2>Suggested Code of conduct</h2>
+  <h2>Vorgeschlagener Verhaltenskodex
+</h2>
 <ul>
-  <li>Be respectful to one another and try to give a chance to speak to the least outspoken.</li>
-<li>Do not force anyone to speak.</li>
-<li>Consider that there may be some people who do not have a camera on their computer.</li>
-<li>Speak slowly and try to make yourself understood, <b>especially</b> if you are using your mother tongue.</li>
+  <li>Geht respektvoll miteinander um und versucht jedem eine Chance sich auszusprechen.</li>
+<li>Zwingt niemanden zu sprechen.</li>
+<li>Bedenkt, dass nicht jeder eine Kamera an seinem Computer hat.</li>
+<li>Sprecht langsam und verst&auml;ndlich, <b>besonders</b> wenn du in deiner Muttersprache sprichst.</li>
 </ul>
-<a href="#top">Back to top</a>
+<a href="#top">Zur&uuml;ck</a>
 </div>
