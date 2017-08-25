@@ -12,11 +12,11 @@
            <li><a href="#register">Reg&iacute;strate</a> de antemano.</li>
            <li><a href="#login">Con&eacute;ctate</a> 10 min antes de que comience el evento.</li>
            <li><a href="#table">Click en el bot&oacute;n </a> para ir a tu primera mesa.</li>
-           <li>Durante cada <a href="#section">sesi&oacute;n</a> se discutir&aacute; un conjunto de preguntas en muchas mesas a la vez, para varias <a data-slide-to="6">rondas</a>.</li>
+           <li>Durante cada <a href="#section">sesi&oacute;n</a> se discutir&aacute; un conjunto de preguntas en muchas mesas a la vez, para varias <a href="#round">rondas</a>.</li>
            <li>Las preguntas se asignan al azar.
 </li>
-           <li>Por favor, observa la <a href="etiquette">etiqueta</a> del DiEM Caf&eacute; .</li>
-           <li>Toma <a href="notes">notas</a> <b>breves</b>.</li>
+           <li>Por favor, observa la <a href="#etiquette">etiqueta</a> del DiEM Caf&eacute; .</li>
+           <li>Toma <a href="#notes">notas</a> <b>breves</b>.</li>
            <li>Pasa a la siguiente mesa al final de cada ronda.</li>
            <li>YSe le notificar&aacute; autom&aacute;ticamente los resultados despu&eacute;s de la cafeter&iacute;a, cuando est&eacute;n listos.</li>
          </ol>

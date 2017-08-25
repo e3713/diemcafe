@@ -11,11 +11,11 @@
              <ol>
            <li><a href="#register">Inscrivez-vous</a> &agrave; l'avance</li>
            <li><a href="#login">Connectez-vous</a> 10 min avant le d&eacute;but de l'&eacute;v&eacute;nement</li>
-           <li>Clickez pour demander au syst&egrave;me de vous assigner une<a href="#table">table</a> </li>
-           <li>Au cours de chaque <a href="#section">session</a> , un ensemble de questions sera discut&eacute; dans de nombreuses tables &agrave; la fois, &agrave; plusieurs r<a data-slide-to="6">s&eacute;ries</a>.</li>
+           <li>Clickez pour demander au syst&egrave;me de vous assigner une <a href="#table">table</a> </li>
+           <li>Au cours de chaque <a href="#section">session</a>, un ensemble de questions sera discut&eacute; dans de nombreuses tables &agrave; la fois, en plusieurs <a href="#round">s&eacute;ries</a>.</li>
            <li>Les questions sont attribu&eacute;es au hasard.</li>
-           <li>Veuillez respecter <a href="etiquette">l'etiquette</a> du DiEM Caf&eacute;.</li>
-           <li>Prenez des <a href="notes">notes</a> <b>tres courtes</b>.</li>
+           <li>Veuillez respecter <a href="#etiquette">l'etiquette</a> du DiEM Caf&eacute;.</li>
+           <li>Prenez des <a href="#notes">notes</a> <b>tres courtes</b>.</li>
            <li>Passez &agrave; la table suivant &agrave; la fin de chaque tour.</li>
            <li>Vous serez automatiquement inform&eacute; des r&eacute;sultats apr&egrave;s le caf&eacute;, quand ils seront pr&ecirc;ts.</li>
          </ol>
@@ -56,7 +56,7 @@
 
         <a name="round"></a>
 <div class="jumbotron jumbotron-alt">
-          <h2>s&eacute;ries</h2>
+          <h2>S&eacute;ries</h2>
           <p>Un tour de discussion est une p&eacute;riode de 25 minutes au cours de laquelle tous les groupes discutent autour de leurs tables, dans la m&ecirc;me conf&eacute;rence Zoom, une question qui sera affich&eacute;e &agrave; l'&eacute;cran. Cinq minutes avant la fin du tour, une tonalit&eacute; vous avertit que le temps est termin&eacute; et que vous n'avez plus que trois minutes avant que le pad ne soit verrouill&eacute;.</p>
           <a href="#top">Retour</a>
         </div>

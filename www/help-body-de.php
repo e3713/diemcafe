@@ -12,10 +12,10 @@
            <li><a href="#register">Registriert</a> euch im Voraus.</li>
            <li><a href="#login">Meldet euch</a> 10 Minuten vor Beginn des Events an.</li>
            <li>Dr&uuml;ckt den Knopf, um dem ersten <a href="#table">Tisch</a> beizutreten.</li>
-           <li>W&auml;hrend jedes <a href="#section">Sektionen</a> wird eine Anzahl Fragen an vielen Tischen gleichzeitig und &uuml;ber mehrere <a data-slide-to="6">Runden</a> hinweg diskutiert.</li>
+           <li>W&auml;hrend jedes <a href="#section">Sektionen</a> wird eine Anzahl Fragen an vielen Tischen gleichzeitig und &uuml;ber mehrere <a href="#round">Runden</a> hinweg diskutiert.</li>
            <li>Die Fragen werden zuf&auml;llig zugeteilt.</li>
-           <li>Bitte beachtet die DiEM Caf&eacute; <a href="etiquette">Etikette</a>.</li>
-           <li>Schreibt <b>sehr kurze</b> <a href="notes">Notizen</a>.</li>
+           <li>Bitte beachtet die DiEM Caf&eacute; <a href="#etiquette">Etikette</a>.</li>
+           <li>Schreibt <b>sehr kurze</b> <a href="#notes">Notizen</a>.</li>
            <li>Wechselt am Ende jeder Runde zum n&auml;chsten Tisch.</li>
            <li>Die Ergebnisse des Caf&eacute;s werden euch, sobald sie vorliegen, automatisch zugesandt.</li>
          </ol>

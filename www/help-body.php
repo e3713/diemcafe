@@ -12,10 +12,10 @@
            <li><a href="#register">Register</a> in advance</li>
            <li><a href="#login">Log in</a> 10 minutes before the event starts</li>
            <li>Click the button to go to your first <a href="#table">table</a></li>
-           <li>During each <a href="#section">section</a> a set of questions will be discussed in many tables at a time, for several <a data-slide-to="6">rounds</a>.</li>
+           <li>During each <a href="#section">section</a> a set of questions will be discussed in many tables at a time, for several <a href="#round">rounds</a>.</li>
            <li>Questions are assigned randomly.</li>
-           <li>Please observe the DiEM Caf&eacute; <a href="etiquette">etiquette</a>.</li>
-           <li>Take <b>very short</b> <a href="notes">notes</a>.</li>
+           <li>Please observe the DiEM Caf&eacute; <a href="#etiquette">etiquette</a>.</li>
+           <li>Take <b>very short</b> <a href="#notes">notes</a>.</li>
            <li>Move to the next table at the end of each round.</li>
            <li>You will automatically be notified of the results after the caf&eacute;, when they are ready.</li>
          </ol>
@@ -44,7 +44,7 @@
 <p>When you are not the host of a table having zoom installed is everything you need to do. The host of your table will open a meeting and generate an invitation link to it. This link will be shared on the table page and everything you have to do is click on it and you will join the meeting. </p>
 
 <p>To become the host of a new meeting you need to click on &ldquo;sign in&rdquo; and generate an account
-  (or connect to a social network). After signing in, another window opens where you click on
+  (or connect using your log-in details for another social network). After signing in, another window opens where you click on
   &ldquo;Start with video&rdquo; to start a new meeting.
   The meeting window will open and zoom should automatically recognise your camera and microphone settings.
   Click on invite. A new window will open. Click on &ldquo;copy link&rdquo; and paste the link in the DiEM Caf&eacute; tab.
