@@ -10,12 +10,14 @@ $current_event = CafeEvent::current($dbh);
       switch($current_event->state()) {
         case 'waiting':
           echo '<p>' . $I18N->t('next_event') . ': ' . htmlentities($current_event->name) . '</p>';
+          echo '<p><a href="eventinfo.php">' . $I18N->t('click_here_for_more_information') . '</a></p>';
           echo '<p>' . $I18N->t('time_remaining') . ': <span id="timer"></span></p>';
           echo '<p><a href="register.php">' . $I18N->t('click_here_to_register') . '</a>.</p>';
           echo '<p class="hidden" id="overview_link"><a href="eventoverview.php">' . $I18N->t('click_here_to_participate') . '</a>.</p>';
           break;
         case 'running':
           echo '<p>' . $I18N->t('current_event') . ': ' . htmlentities($current_event->name) . '</p>';
+          echo '<p><a href="eventinfo.php">' . $I18N->t('click_here_for_more_information') . '</a></p>';
           echo '<p>' . $I18N->t('time_remaining') . ': <span id="timer"></span></p>';
           echo '<p><a href="eventoverview.php">' . $I18N->t('click_here_to_participate') . '</a>.</p>';
           break;

@@ -72,7 +72,8 @@ class I18N {
     'zoom_launch_failover' => "If clicking the button doesn't work, please copy and paste this URL into a new browser tab or window:",
     'round_ending_help' => 'The round is ending soon. Please discuss together the thoughts you want to record at the end of this round, and coordinate between yourselves to submit them to the system.',
     'round_ended_help' => 'This round has now ended. When you are ready, click the button at the bottom of the page to go to the next',
-    'event_end_help' => 'This event has now ended. Thank you very much for participating in DiEM Cafe!'
+    'event_end_help' => 'This event has now ended. Thank you very much for participating in DiEM Cafe!',
+    'click_here_for_more_information' => 'Click here for more information'
   ],
   'es' => [
     'event' => 'Evento',
@@ -145,7 +146,8 @@ class I18N {
     'zoom_launch_failover' => "Si haciendo click en el boton no funciona, por favor cpoia y pega este enlace en una ventana o tab nuevo:",
     'round_ending_help' => 'Esta ronda termina pronto. Por favor, decide entre todos los pensamientos que querais grabar al final de esta ronda, y coordina entre todos mandarlos al sistema.',
     'round_ended_help' => 'Esta ronda ha terminado. Cuando quieras, haz click en el boton al fondo para ir al siguiente',
-    'event_end_help' => 'Este evento ha terminado. Muchas gracias por participar en DiEM Cafe!'
+    'event_end_help' => 'Este evento ha terminado. Muchas gracias por participar en DiEM Cafe!',
+    'click_here_for_more_information' => 'Haz click aqui para mas informacion'
   ]
 ];
 
