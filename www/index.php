@@ -12,7 +12,10 @@ $current_event = CafeEvent::current($dbh);
           echo '<p>' . $I18N->t('next_event') . ': ' . htmlentities($current_event->name) . '</p>';
           echo '<p><a href="eventinfo.php">' . $I18N->t('click_here_for_more_information') . '</a></p>';
           echo '<p>' . $I18N->t('time_remaining') . ': <span id="timer"></span></p>';
-          echo '<p><a href="register.php">' . $I18N->t('click_here_to_register') . '</a>.</p>';
+          if(!$LOGIN_USER) {
+            echo '<p><a href="register.php">' . $I18N->t('click_here_to_register') . '</a>.</p>';
+            echo '<p><b>If you have already registered, please <a href="login.php">log in</a> if you want to participate.</b></p>';
+          }
           echo '<p class="hidden" id="overview_link"><a href="eventoverview.php">' . $I18N->t('click_here_to_participate') . '</a>.</p>';
           break;
         case 'running':
