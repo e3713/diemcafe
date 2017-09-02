@@ -1,5 +1,23 @@
 <?php
 
+/*! \mainpage DiEM Cafe Developer Documentation
+ *
+ * \section general General considerations
+ *
+ * All objects have a unique ID, assigned by MySQL when inserting into the database.
+ * Constructors load an existing record from the database.
+ * Where programmatic creation of records is required, a 'create' method is implemented, which inserts a record and then calls the constructor, thus loading the record back out of the database. This is a bit suboptimal but ensures absolute consistency between the database and the object model, eg in the case that MySQL assigns default values to fields.
+ *
+ * \section object_model Object model
+ * - Each cafe event is represented by a CafeEvent class, corresponding to the Event table in the database.
+ * - An event consists of a number of sections, represented by the CafeSection class, stored in the Section table in the database.
+ * - Each section is divided into a number of rounds, represented by the CafeRound class.
+ * - During the event, conversations take place at tables. A set of users, the participants, is attached to a conversation. A table persists throughout the life of the event; during each round a conversation takes place at a given table.
+ * - A table is represented by the CafeTable object, stored in the CafeTable database table.
+ * - A conversation is represented by the CafeConversation object, stored in the Conversation table.
+ * - During each conversation, users make notes by recording 'thoughts' (text snippets) in the database, represnted by the CafeThought class, stored in the Thought table in the database.
+ *
+ */
 //!  Represents a user of the DiEM Cafe
 /*!
   The frontend creates an instance of this class to represent the logged-in user. Any user-related operations should hang off this class.

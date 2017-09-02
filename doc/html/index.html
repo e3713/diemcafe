@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DiEM Cafe: Main Page</title>
+<title>DiEM Cafe: DiEM Cafe Developer Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,7 +30,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">DiEM Cafe
    </div>
-   <div id="projectbrief">OnlineWorldCafeimplementation</div>
+   <div id="projectbrief">Online World Cafe implementation</div>
   </td>
  </tr>
  </tbody>
@@ -81,10 +81,24 @@ $(document).ready(function(){initNavTree('index.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">DiEM Cafe Documentation</div>  </div>
+<div class="title">DiEM <a class="el" href="classCafe.html">Cafe</a> Developer Documentation </div>  </div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><h1><a class="anchor" id="general"></a>
+General considerations</h1>
+<p>All objects have a unique ID, assigned by MySQL when inserting into the database. Constructors load an existing record from the database. Where programmatic creation of records is required, a 'create' method is implemented, which inserts a record and then calls the constructor, thus loading the record back out of the database. This is a bit suboptimal but ensures absolute consistency between the database and the object model, eg in the case that MySQL assigns default values to fields.</p>
+<h1><a class="anchor" id="object_model"></a>
+Object model</h1>
+<ul>
+<li>Each cafe event is represented by a <a class="el" href="classCafeEvent.html" title="Represents a specific Cafe event, eg &#39;DiEM Cafe Passau&#39;. ">CafeEvent</a> class, corresponding to the Event table in the database.</li>
+<li>An event consists of a number of sections, represented by the <a class="el" href="classCafeSection.html" title="Represents a section of the Cafe (a Cafe Event is divided into Sections, each with one or more Rounds...">CafeSection</a> class, stored in the Section table in the database.</li>
+<li>Each section is divided into a number of rounds, represented by the <a class="el" href="classCafeRound.html" title="Represents a round within a given section of a given event. ">CafeRound</a> class.</li>
+<li>During the event, conversations take place at tables. A set of users, the participants, is attached to a conversation. A table persists throughout the life of the event; during each round a conversation takes place at a given table.</li>
+<li>A table is represented by the <a class="el" href="classCafeTable.html" title="Represents a table at the Cafe. A Table is associated with an Event (for now), and Conversations betw...">CafeTable</a> object, stored in the <a class="el" href="classCafeTable.html" title="Represents a table at the Cafe. A Table is associated with an Event (for now), and Conversations betw...">CafeTable</a> database table.</li>
+<li>A conversation is represented by the <a class="el" href="classCafeConversation.html" title="Represents a conversation. ">CafeConversation</a> object, stored in the Conversation table.</li>
+<li>During each conversation, users make notes by recording 'thoughts' (text snippets) in the database, represnted by the <a class="el" href="classCafeThought.html" title="Represents a &#39;thought&#39; (text snippet) submitted to the system as part of a conversation by a user...">CafeThought</a> class, stored in the Thought table in the database. </li>
+</ul>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
