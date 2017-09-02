@@ -96,8 +96,19 @@ Object model</h1>
 <li>During the event, conversations take place at tables. A set of users, the participants, is attached to a conversation. A table persists throughout the life of the event; during each round a conversation takes place at a given table.</li>
 <li>A table is represented by the <a class="el" href="classCafeTable.html" title="Represents a table at the Cafe. A Table is associated with an Event (for now), and Conversations betw...">CafeTable</a> object, stored in the <a class="el" href="classCafeTable.html" title="Represents a table at the Cafe. A Table is associated with an Event (for now), and Conversations betw...">CafeTable</a> database table.</li>
 <li>A conversation is represented by the <a class="el" href="classCafeConversation.html" title="Represents a conversation. ">CafeConversation</a> object, stored in the Conversation table.</li>
-<li>During each conversation, users make notes by recording 'thoughts' (text snippets) in the database, represnted by the <a class="el" href="classCafeThought.html" title="Represents a &#39;thought&#39; (text snippet) submitted to the system as part of a conversation by a user...">CafeThought</a> class, stored in the Thought table in the database. </li>
+<li>During each conversation, users make notes by recording 'thoughts' (text snippets) in the database, represnted by the <a class="el" href="classCafeThought.html" title="Represents a &#39;thought&#39; (text snippet) submitted to the system as part of a conversation by a user...">CafeThought</a> class, stored in the Thought table in the database.</li>
 </ul>
+<h1><a class="anchor" id="event_setup"></a>
+Event Setup</h1>
+<p>Events have to be configured manually by inserting the appropriate records into the database, as in the example that follows:</p><ul>
+<li>insert into Event set Name = 'My Event', DiscussionTime = NN, ExtraTime = N, Start = 'YYYY-MM-DD HH:MM:SS'; &ndash; main Event record.</li>
+<li>insert into Section set EventID = &lt;ID of="" previously="" created="" event&gt;=""&gt;, SectionNumber = 1; &ndash; repeat for all sections; increment SectionNumber each time.</li>
+<li>insert into Round set SectionID = &lt;ID of previously created Section, RoundNumber = 1; &ndash; repeat for all rounds; increment RoundNumber each time.</li>
+<li>insert into Question set SectionID = &lt;ID of previously created Round, TranslationLanguage = 'en', Val = 'This is a question'; &ndash; repeat for all questions in all available translation languages.</li>
+</ul>
+<h1><a class="anchor" id="table_allocateion"></a>
+Table Allocation</h1>
+<p>To allocate users to tables, visit <a class="el" href="allocate-tables_8php.html">allocate-tables.php</a> before the event starts, and click the button. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

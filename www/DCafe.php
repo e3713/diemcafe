@@ -17,6 +17,15 @@
  * - A conversation is represented by the CafeConversation object, stored in the Conversation table.
  * - During each conversation, users make notes by recording 'thoughts' (text snippets) in the database, represnted by the CafeThought class, stored in the Thought table in the database.
  *
+ * \section event_setup Event Setup
+ * Events have to be configured manually by inserting the appropriate records into the database, as in the example that follows:
+ * - insert into Event set Name = 'My Event', DiscussionTime = NN, ExtraTime = N, Start = 'YYYY-MM-DD HH:MM:SS'; -- main Event record.
+ * - insert into Section set EventID = <ID of previously created event>, SectionNumber = 1; -- repeat for all sections; increment SectionNumber each time.
+ * - insert into Round set SectionID = <ID of previously created Section, RoundNumber = 1; -- repeat for all rounds; increment RoundNumber each time.
+ * - insert into Question set SectionID = <ID of previously created Round, TranslationLanguage = 'en', Val = 'This is a question'; -- repeat for all questions in all available translation languages.
+ *
+ * \section table_allocateion Table Allocation
+ * To allocate users to tables, visit allocate-tables.php before the event starts, and click the button.
  */
 //!  Represents a user of the DiEM Cafe
 /*!

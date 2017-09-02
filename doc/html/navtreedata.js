@@ -3,7 +3,9 @@ var NAVTREE =
   [ "DiEM Cafe", "index.html", [
     [ "DiEM Cafe Developer Documentation", "index.html", [
       [ "General considerations", "index.html#general", null ],
-      [ "Object model", "index.html#object_model", null ]
+      [ "Object model", "index.html#object_model", null ],
+      [ "Event Setup", "index.html#event_setup", null ],
+      [ "Table Allocation", "index.html#table_allocateion", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -28,7 +30,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "DCafe_8php.html",
-"login_8php.html#a8864301a3bb1cad88150fc8f0c41e628"
+"login_8php.html#a05225452cedd14b838d4b0624cd70f1d"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
