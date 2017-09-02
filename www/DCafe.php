@@ -649,7 +649,7 @@ class CafeSection {
 
 	public function previous() {
 		// Identify and return the previous section.
-		$sth = $this->dbh->prepare('select SectionID from Section where EventID = ? and SectionNumber < ?');
+		$sth = $this->dbh->prepare('select SectionID from Section where EventID = ? and SectionNumber < ? order by SectionNumber desc limit 1');
 		$sth->execute([$this->event_id, $this->section_number]);
 		if($row = $sth->fetch()) {
 			return new CafeSection($this->dbh, $row['SectionID']);
@@ -660,7 +660,7 @@ class CafeSection {
 
 	public function next() {
 		// Identify and return the previous section.
-		$sth = $this->dbh->prepare('select SectionID from Section where EventID = ? and SectionNumber > ?');
+		$sth = $this->dbh->prepare('select SectionID from Section where EventID = ? and SectionNumber > ? order by SectionNumber limit 1');
 		$sth->execute([$this->event_id, $this->section_number]);
 		if($row = $sth->fetch()) {
 			return new CafeSection($this->dbh, $row['SectionID']);
@@ -804,8 +804,8 @@ class CafeTable {
 	}
 
 	public function conversation_for_round($round_id) {
-			$sth = $this->dbh('select ConversationID from Conversation where RoundID = ?');
-			$sth-execute([$round_id]);
+			$sth = $this->dbh('select ConversationID from Conversation where TableID = ? and RoundID = ?');
+			$sth-execute([$this->id, $round_id]);
 			if($row = $sth->fetch(PDO::FETCH_NUM)) {
 				return new CafeConversation($this->dbh, $row[0]);
 			}
@@ -823,8 +823,6 @@ class CafeConversation {
 	public $zoom_link;
 
 	public $full; // Temporary property when allocating conversations - indicates if conversation is 'full', ie max participants reached
-//	public $language_id;
-//	public $thoughts;
 
 	public function __construct(\PDO $dbh_in, $id_in) {
 		$this->dbh = $dbh_in;
@@ -836,9 +834,6 @@ class CafeConversation {
 		$this->round_id = $row['RoundID'];
 		$this->table_id = $row['TableID'];
 		$this->zoom_link = $row['ZoomLink'];
-//		$this->language_id = $row['LanguageCode'];
-//		$this->thoughts = [$row['Thought1'], $row['Thought2'], $row['Thought3'], $row['Thought4'], $row['Thought5']];
-
 	}
 
 	public static function create(\PDO $dbh_in, $round_id, $table_id) {
@@ -890,6 +885,7 @@ class CafeThought {
 	public $id;
 	public $text;
 	public $conversation_id;
+	private $dbh; /*!< Database handle for SQL queries */
 
 	public function __construct(\PDO $dbh_in, $id_in) {
 		$this->dbh = $dbh_in;
@@ -908,6 +904,7 @@ class CafeCountry {
 	public $code;
 	public $name;
 
+	private $dbh; /*!< Database handle for SQL queries */
 	public function __construct(\PDO $dbh_in, $code_in, $translation_language) {
 		$this->dbh = $dbh_in;
 		$this->code = $code_in;
@@ -936,6 +933,7 @@ class CafeLanguage {
 	public $code;
 	public $name;
 
+	private $dbh; /*!< Database handle for SQL queries */
 	public function __construct(\PDO $dbh_in, $code_in, $translation_language) {
 		$this->dbh = $dbh_in;
 		$this->code = $code_in;
