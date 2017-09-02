@@ -1,17 +1,28 @@
 <?php
 
-class CafeUser {
-	private $dbh;
-	public $id;
-	public $email;
-	public $name;
-	public $country;
-	public $dsc;
-	public $city;
-	public $notify;
-	public $host;
-	public $languages;
+//!  Represents a user of the DiEM Cafe
+/*!
+  The frontend creates an instance of this class to represent the logged-in user. Any user-related operations should hang off this class.
+*/
 
+class CafeUser {
+	private $dbh; /*!< Database handle for SQL queries */
+	public $id; /*!< Integer: user ID (auto allocated by MySQL) */
+	public $email; /*!< String: Email address = login username */
+	public $name; /*!< String: Full name */
+	public $country_id; /*!< String: Country ID, eg 'es' */
+	public $dsc; /*!< String: DSC - unused */
+	public $city; /*!< String: City - probably equivalent to DSC */
+	public $notify; /*!< Bool: Whether or not to notify user of forthcoming events */
+	public $host; /*!< Whether the user is willing to host a table */
+	public $languages; /*!< Array of language data, indicating languages user speaks and level spoken */
+
+	//! Creates an instance of CafeUser, loaded from an existing database record.
+	/*!
+		\param $dbh_in Database handle
+		\param $id_in Integer: ID of user record in database
+		\return CafeCountry instance
+	*/
 	public function __construct(\PDO $dbh_in, $id_in) {
 		$this->dbh = $dbh_in;
 		$this->id = $id_in;
@@ -33,11 +44,19 @@ class CafeUser {
 		$this->languages = $sth->fetchAll();
 	}
 
+	//! Returns a CafeCountry record that represents the country of residence of the user, localised to the currently-selected interface language.
+     /*!
+       \param $TranslationLanguage Language to use for localised country text, eg 'en'
+       \return CafeCountry instance
+     */
 	public function country($TranslationLanguage) {
 		return new CafeCountry($this->dbh, $this->country_id, $TranslationLanguage);
 	}
 
-	/* What conversation am I attached to? */
+	//! Determines the current conversation to which the user is attached, based on the current time
+     /*!
+       \return CafeConversation instance
+     */
 	public function current_conversation() {
 		$current_event = CafeEvent::current($this->dbh);
 		$round = $current_event->current_round();
@@ -50,7 +69,11 @@ class CafeUser {
 		return NULL;
 	}
 
-	// This gets the previous conversation for the current user. What's actually used in the UI is the previous conversation for the current *table*, ie for the *host* of the current table - who is also a user, of course. See table.php.
+	//! Return the previous conversation for this user. What's actually used in the UI is the previous conversation for the current *table*, ie for the *host* of the current table - who is also a user, of course - in order to get the Thoughts associated with that conversation. See table.php
+	/*!
+	\param $current_conversation Conversation to which the user is currently attached (used to infer current round)
+	\return CafeConversation instance
+	*/
 	public function previous_conversation($current_conversation) {
 		$round = new CafeRound($this->dbh, $current_conversation->round_id);
 		$previous_round = $round->previous();
@@ -63,6 +86,11 @@ class CafeUser {
 		return NULL;
 	}
 
+	//! Return the next conversation for this user. Used to generate 'next table' link in UI.
+	/*!
+	\param $current_conversation Conversation to which the user is currently attached (used to infer current round)
+	\return CafeConversation instance
+	*/
 	public function next_conversation($current_conversation) {
 		$round = new CafeRound($this->dbh, $current_conversation->round_id);
 		$next_round = $round->next();
@@ -77,6 +105,11 @@ class CafeUser {
 		return NULL;
 	}
 
+	//! Get the complete list of conversastions to which this user is attached.
+	/*!
+	\param $event_id ID of event for which to get conversations
+	\return Array of CafeConversation instances
+	*/
 	public function conversations($event_id) {
 		if(!$event_id) {
 			$current_event = CafeEvent::current($this->dbh);
@@ -95,11 +128,21 @@ class CafeUser {
 		return $results;
 	}
 
+	//! Attach a user to a Conversation
+	/*!
+	\param $conversation CafeConversation instance to which to attach.
+	*/
 	public function attach_to_conversation($conversation) {
 		$sth = $this->dbh->prepare('insert into UserConversation set UserID = ?, ConversationID = ?');
 		$sth->execute([$this->id, $conversation->id]);
 	}
 
+	//! Get list of users speaking X languages. This is not used in the live code and does not restrict to the current event atm.
+	/*!
+	\param $dbh Database handle
+	\param $x Number of languages user must speak
+	\return Array of CafeUser instances
+	*/
 	public static function x_linguals($dbh, $x) {
 			// Get a list of all mono/bi/tri lingual users (determined by $x)
 			// TODO: ideally restrict this to users for this particular event. Currently all registered users are used.
@@ -113,6 +156,11 @@ class CafeUser {
 			return $results;
 	}
 
+	//! Test f this user speaks the specified language
+	/*!
+	\param $language_id Language code, eg 'en'
+	\return Bool: true if user speaks the language, false if not
+	*/
 	public function speaks($language_id) {
 			foreach($this->languages as $language) {
 				if($language['LanguageCode'] == $language_id)
@@ -121,6 +169,10 @@ class CafeUser {
 			return false;
 	}
 
+	//! Return the table this user hosts. TODO: not restricted to current event, and a user may host multiple tables once we move to tables being associated with Sections not Events.
+	/*!
+	\return CafeTable instance or NULL if the user is not hosting a table.
+	*/
 	public function hosted_table() {
 		$sth = $this->dbh->prepare('select TableID from CafeTable where HostUserID = ?');
 		$sth->execute([$this->id]);
@@ -132,6 +184,12 @@ class CafeUser {
 
 	}
 
+	//! Get list of users willing to host tables.
+	/*!
+	\param $dbh Database handle
+	\param $logged_in_only Restrict to only those users logged in. TODO this will change once user have to explicitly opt in to a given event.
+	\return Array of CafeUser instances
+	*/
 	public static function hosts($dbh, $logged_in_only) {
 		if($logged_in_only)
 			$SQL = 'select User.id from User inner join sessions on sessions.uid = User.id where sessions.expiredate > now() and User.Host = 1';
@@ -150,6 +208,12 @@ class CafeUser {
 
 	}
 
+	//! Count total number of users.
+	/*!
+	\param $dbh Database handle
+	\param $logged_in_only Restrict to only those users logged in. TODO this will change once user have to explicitly opt in to a given event.
+	\return Integer: count of users
+	*/
 	public static function count($dbh, $logged_in_only) {
 		if($logged_in_only)
 			$SQL = 'select count(*) from User inner join sessions on sessions.uid = User.id where sessions.expiredate > now()';
@@ -162,6 +226,12 @@ class CafeUser {
 		return $row[0];
 	}
 
+	//! List all users on the system.
+	/*!
+	\param $dbh Database handle
+	\param $logged_in_only Restrict to only those users logged in. TODO this will change once user have to explicitly opt in to a given event.
+	\return Array of CafeUser instances
+	*/
 	public static function enumerate($dbh, $logged_in_only) {
 			if($logged_in_only)
 				$SQL = 'select User.id from User inner join sessions on sessions.uid = User.id where sessions.expiredate > now()';
@@ -192,22 +262,33 @@ function host_sort($a, $b) {
 }
 */
 
+//!  Represents a specific Cafe event, eg 'DiEM Cafe Passau'
+/*!
+  Key static methods on this class use the current time to determine if there is a currently-running event, one that previously ended, or an up-coming event.
+	TODO: this assumes that only one event can take place simultaneously on the system. In theory there could be more than one.
+*/
 
 class CafeEvent {
 
-	private $dbh;
+	private $dbh; /*!< Database handle for SQL queries */
 
 	const event_end_sql = 'date_add(Start, interval ((select count(*) from Round inner join Section on Section.SectionID = Round.SectionID where Section.EventID = Event.EventID) * DiscussionTime + ExtraTime ) minute)';
 
-	public $id;
-	public $start;
-	public $name;
-	public $num_tables;
-	public $registration_end;
-	public $discussion_time;
-	public $extra_time;
-	public $end;
+	public $id; /*!< Integer: event ID (auto allocated by MySQL) */
+	public $start; /*!< Start date/time, seconds since epoch */
+	public $name; /*!< Event name TODO Currently non-localised - allow for localisation of event names? */
+	public $num_tables; /*!< Number of tables required for event. In final algorithm, this is dynamic. SCHEDULE FOR REMOVAL */
+	public $registration_end; /*!< Currently unused. Date/time after which users may not register. SCHEDULLE FOR REMOVAL */
+	public $discussion_time; /*!< Discussion time per round */
+	public $extra_time; /*!<  Extra time allowed in final round */
+	public $end; /*!< End date/time, seconds since epoch. Computed based on event start time, number of sections/rounds, discussion_time and extra_time */
 
+	//! Creates an instance of CafeEvent, loaded from an existing database record.
+	/*!
+		\param $dbh_in Database handle
+		\param $id_in Integer: ID of event record in database
+		\return CafeEvent instance
+	*/
 	public function __construct(\PDO $dbh_in, $id_in) {
 		$this->dbh = $dbh_in;
 		$this->id = $id_in;
@@ -227,6 +308,11 @@ class CafeEvent {
 		$this->end = $row['_End'];
 	}
 
+	//! Determines the 'current' event, if there is one, based on the current time. This is either the currently-running event, the next scheduled event, or the last event, in that order.
+	/*!
+		\param $dbh_in Database handle
+		\return CafeEvent instance or NULL
+	*/
 	public static function current($dbh_in) {
 
 		// Decide on the 'current' event based on timing data in the database. This is either the currently-active event, or the next upcoming event, or
@@ -261,7 +347,10 @@ class CafeEvent {
 		return NULL;
 	}
 
-	/* Return state of event: waiting, running, finished  */
+	//! Determine the state of this event: 'running', 'waiting' if it's a future event or 'finished' if it's the last event.
+	/*!
+		\return String: 'running', 'waiting' or 'finished'
+	*/
 	public function state() {
 		$t = time();
 		if($t < $this->start ) {
@@ -273,6 +362,10 @@ class CafeEvent {
 		return 'finished';
 	}
 
+	//! Determine the current round, based on the current time. TODO doesn't take into account ExtraTime
+	/*!
+		\return CafeRound instance, or NULL if no current round (eg if event not running)
+	*/
 	public function current_round() {
 			// Determine, based on the time elapsed since the start of the event, the current round we are in.
 			// We assume sections occur in sequence, as described by Section.SectionNumber, rounds in sequence as described by Round.RoundNumber
@@ -298,6 +391,10 @@ class CafeEvent {
 			return new CafeRound($this->dbh, $row['RoundID']);
 	}
 
+	//! Count total number of rounds in event
+	/*!
+		\return Integer: total number of rounds
+	*/
 	public function num_rounds() {
 		$sth = $this->dbh->prepare('select count(*) as C from Event inner join Section on Section.EventID = Event.EventID inner join Round on Round.SectionID = Section.SectionID where Event.EventID = ?');
 		$sth->execute([$this->id]);
@@ -305,7 +402,10 @@ class CafeEvent {
 		return $row['C'];
 	}
 
-	// Get nth round - base zero
+	//! Get the nth round in the event, base zero
+	/*!
+		\return CafeRound instance
+	*/
 	public function nth_round($n) {
 		// Get a list of round IDs, ordered by Section.SectionNumber then Round.RoundNumber
 		$sth = $this->dbh->prepare('select Round.RoundID from Event inner join Section on Section.EventID = Event.EventID inner join Round on Round.SectionID = Section.SectionID where Event.EventID = ? order by Section.SectionNumber, Round.RoundNumber limit ' . $n . ', 1');
@@ -319,7 +419,10 @@ class CafeEvent {
 
 
 
-	/* Return list of event sections */
+	//! Get list of all sections in the event
+	/*!
+		\return Array of CafeSection instances
+	*/
 	public function sections() {
 
 		$sth = $this->dbh->prepare('select SectionID from Section where EventID = ?');
@@ -333,6 +436,7 @@ class CafeEvent {
 		return $results;
 	}
 
+	//! Delete tables, conversations, user to conversation relationships for this event - used to reset state before running table allocation algorithm.
 	public function reset() {
 		// Clear tables and conversations
 
@@ -353,7 +457,11 @@ class CafeEvent {
 			}
 	}
 
-// Interim algorithm that allocates users at random
+	//! Allocate users to conversations at random, not taking into account language preferences. Used in first two test runs of the system. Filters for currently logged-in users.
+	/*!
+		\param $max_users_per_table Maximum number of users on each table. Once a table is full, a new one is created.
+		\return Empty array (intended to contain users who could not be allocated to tables, but that never happens with this algorithm)
+	*/
 	public function allocate_conversations_RANDOM($max_users_per_table) {
 
 		// Delete any existing table/conversation setup
@@ -417,7 +525,11 @@ class CafeEvent {
 	return array();
 }
 
-// Draft algorithm by Adam that allocates users to tables ad hoc (not Pedrojuan's)
+//! Allocate users to conversations, taking into account language preferences. Draft (non-working) version of algorithm by Adam, not following Pedrojuan's model.
+/*!
+	\param $max_users_per_table Maximum number of users on each table. Once a table is full, a new one is created.
+	\return Empty array (intended to contain users who could not be allocated to tables, but that never happens with this algorithm)
+*/
 	public function allocate_conversations_adam($max_users_per_table) {
 			// Main algorithm: attempt to allocate users to conversations (tables), taking into account their language preferences.
 			$sections = $this->sections();
@@ -524,6 +636,10 @@ class CafeEvent {
 				return $unallocated_users;
 			}
 
+			//! Allocate users to conversations, taking into account language preferences. Adapter method around Miguel's code in Cafe.php
+			/*!
+				\param $max_users_per_table Maximum number of users on each table - UNUSED.
+			*/
 			// ARN: $max_users_per_table is not used here as this is hardcoded in Miguel's code.
 			public function allocate_conversations($max_users_per_table) {
 				$this->reset();
@@ -598,16 +714,25 @@ class CafeEvent {
 			}
 }
 
+//!  Represents a section of the Cafe (a Cafe Event is divided into Sections, each with one or more Rounds)
+/*!
+*/
+
 class CafeSection {
 
-	private $dbh;
+	private $dbh;/*!< Database handle for SQL queries */
+	public $id; /*!< Integer: section ID (auto allocated by MySQL) */
+	public $section_number; /*!< Numerical index of section, eg 1, 2, 3. Intended to form part of a contiguous sequence, but the code doesn't assume that. */
+	public $name; /*!< Section name. UNUSED - the Question for the given section is displayed instead. SCHEDULE FOR REMOVAL */
+	public $event_id; /*!< ID of Event with which this Section is associated */
+	public $question; /* Question associated with this section. Was a static string, now internationalisable. UNUSED, SCHEDULE FOR REMOVAL */
 
-	public $id;
-	public $section_number;
-	public $name;
-	public $event_id;
-	public $question;
-
+	//! Creates an instance of CafeSection, loaded from an existing database record.
+	/*!
+		\param $dbh_in Database handle
+		\param $id_in Integer: ID of section record in database
+		\return CafeSection instance
+	*/
 	public function __construct(\PDO $dbh_in, $id_in) {
 		$this->dbh = $dbh_in;
 		$this->id = $id_in;
@@ -620,6 +745,11 @@ class CafeSection {
 		$this->event_id = $row['EventID'];
 	}
 
+	//! Get the text of the Question associated with this section, in a specified localised language, or English if not available
+	/*!
+		\param $lang Language code of language in which to fetch question, eg 'en'
+		\return String: question text for this section
+	*/
 	public function question($lang) {
 			// Return the question text for this section, in the appropriate language. If not available, default to English.
 			$sth = $this->dbh->prepare("select Val from Question where SectionID = ? and TranslationLanguage = ?");
@@ -635,7 +765,10 @@ class CafeSection {
 			return NULL;
 	}
 
-	/* Return a set of Round objects for the section */
+	//! Get the rounds associated with this section
+	/*!
+		\return Array of CafeRound instances
+	*/
 	public function rounds() {
 		$sth = $this->dbh->prepare('select RoundID from Round where SectionID = ?');
 		$sth->execute([$this->id]);
@@ -647,6 +780,10 @@ class CafeSection {
 		return $results;
 	}
 
+	//! Get the previous section, by section number, in this event
+	/*!
+		\return CafeSection instance or NULL
+	*/
 	public function previous() {
 		// Identify and return the previous section.
 		$sth = $this->dbh->prepare('select SectionID from Section where EventID = ? and SectionNumber < ? order by SectionNumber desc limit 1');
@@ -658,6 +795,10 @@ class CafeSection {
 
 	}
 
+	//! Get the next section, by section number, in this event
+	/*!
+		\return CafeSection instance or NULL
+	*/
 	public function next() {
 		// Identify and return the previous section.
 		$sth = $this->dbh->prepare('select SectionID from Section where EventID = ? and SectionNumber > ? order by SectionNumber limit 1');
@@ -671,13 +812,22 @@ class CafeSection {
 
 }
 
+//!  Represents a round within a given section of a given event.
+/*!
+*/
+
 class CafeRound {
-	private $dbh;
+	private $dbh;/*!< Database handle for SQL queries */
+	public $id; /*!< Integer: user ID (auto allocated by MySQL) */
+	public $round_number; /*!< Numerical index of round, eg 1, 2, 3. Intended to form part of a contiguous sequence, but the code doesn't assume that. */
+	public $section_id; /*!< ID of section this round forms part of */
 
-	public $id;
-	public $round_number;
-	public $section_id;
-
+	//! Creates an instance of CafeRound, loaded from an existing database record.
+	/*!
+		\param $dbh_in Database handle
+		\param $id_in Integer: ID of user record in database
+		\return CafeRound instance
+	*/
 	public function __construct(\PDO $dbh_in, $id_in) {
 		$this->dbh = $dbh_in;
 		$this->id = $id_in;
@@ -689,10 +839,19 @@ class CafeRound {
 		$this->section_id = $row['SectionID'];
 	}
 
+	//! Get the section this round forms part of.
+	/*!
+		\return CafeSection instance
+	*/
 	public function section() {
 		return new CafeSection($this->dbh, $this->section_id);
 	}
 
+	//! Determine where in the sequence of rounds for the event the current round is located. Used to determine how many rounds have elapsed, and therefore, eg, start andend time of round.
+	/*!
+		\param $event_id ID of event to use as reference
+		\return Integer: nth round, base zero.
+	*/
 	public function sequence($event_id) {
 		// Get a list of round IDs, ordered by Section.SectionNumber then Round.RoundNumber
 		$sth = $this->dbh->prepare('select Round.RoundID from Event inner join Section on Section.EventID = Event.EventID inner join Round on Round.SectionID = Section.SectionID where Event.EventID = ? order by Section.SectionNumber, Round.RoundNumber');
@@ -703,6 +862,10 @@ class CafeRound {
 		return $i;
 	}
 
+	//! Compute round start time, based on position of round in sequence and round length.
+	/*!
+		\return Integer: round start time, seconds since epoch.
+	*/
 	public function start() {
 			// Figure out this round's start time. based on the event start time and the position of this round in the sequence
 				$section = new CafeSection($this->dbh, $this->section_id);
@@ -711,6 +874,11 @@ class CafeRound {
 				return $event->start + $this->sequence($event->id) * $event->discussion_time * 60;
 	}
 
+	//! Determine if this round is the last one for the given event.
+	/*!
+		\param $event_id ID of event to use as reference
+		\return Bool: true if this is the last round in the event
+	*/
 	public function last($event_id) {
 		$sth = $this->dbh->prepare('select Round.RoundID from Event inner join Section on Section.EventID = Event.EventID inner join Round on Round.SectionID = Section.SectionID where Event.EventID = ? order by Section.SectionNumber desc, Round.RoundNumber desc limit 1');
 		$sth->execute([$event_id]);
@@ -719,12 +887,20 @@ class CafeRound {
 
 	}
 
+	//! Compute round end time, based on position of round in sequence and round length.
+	/*!
+		\return Integer: round end time, seconds since epoch.
+	*/
 	public function end() {
 		$section = new CafeSection($this->dbh, $this->section_id);
 		$event = new CafeEvent($this->dbh, $section->event_id);
 		return $this->start() + ($event->discussion_time + ($this->last($event->id) ? $event->extra_time : 0)) * 60;
 	}
 
+	//! Get previous round in event.
+	/*!
+		\return CafeRound instance or NULL
+	*/
 	public function previous() {
 		// Identify and return the previous round.
 		$sth = $this->dbh->prepare('select Round.RoundID from Round where SectionID = ? and RoundNumber < ?');
@@ -743,6 +919,10 @@ class CafeRound {
 		return NULL;
 	}
 
+	//! Get next round in event.
+	/*!
+		\return CafeRound instance or NULL
+	*/
 	public function next() {
 		// Identify and return the previous round.
 		$sth = $this->dbh->prepare('select Round.RoundID from Round where SectionID = ? and RoundNumber > ?');
@@ -766,14 +946,23 @@ class CafeRound {
 
 }
 
+//!  Represents a table at the Cafe. A Table is associated with an Event (for now), and Conversations between various Users take place at these Tables. TODO associate tables with sections
+/*!
+*/
+
 class CafeTable {
-	private $dbh;
+	private $dbh; /*!< Database handle for SQL queries */
+	public $id; /*!< Integer: table ID (auto allocated by MySQL) */
+	public $event_id; /*!< Integer: event ID with which this table is associated */
+	public $host_user_id; /*!< Integer: user ID of host of this table (the person who creates the Zoom converation) */
+	public $language_id; /* String: Language code of language spoken on this table, eg 'en' */
 
-	public $id;
-	public $event_id;
-	public $host_user_id;
-	public $language_id;
-
+	//! Creates an instance of CafeTable, loaded from an existing database record.
+	/*!
+		\param $dbh_in Database handle
+		\param $id_in Integer: ID of table record in database
+		\return CafeTable instance
+	*/
 	public function __construct(\PDO $dbh_in, $id_in) {
 		$this->dbh = $dbh_in;
 		$this->id = $id_in;
@@ -786,6 +975,14 @@ class CafeTable {
 		$this->language_id = $row['LanguageCode'];
 	}
 
+	//! Creates an instance of CafeTable and store in database. Note that code actually calls the constructor, which reloads the just-created record from the database, which is a bit suboptimal but ensures consistency with the database, eg if MySQL assigns default values to fields.
+	/*!
+		\param $dbh_in Database handle
+		\param $event_id Integer: ID of event to which to attach table
+		\param $host_user_id Integer: ID of user hosting table
+		\param $language_id String: language code of language spoken on table
+		\return CafeTable instance
+	*/
 	public static function create (\PDO $dbh_in, $event_id, $host_user_id, $language_id) {
 		$sth = $dbh_in->prepare('insert into CafeTable set EventID = ?, HostUserID = ?, LanguageCode = ?');
 		$sth->execute([$event_id, $host_user_id, $language_id]);
@@ -793,16 +990,28 @@ class CafeTable {
 		return new CafeTable($dbh_in, $id);
 	}
 
-	/* Return details of table language, code and localised language name */
-
+	//! Get details of language spoken at table, rendered in specified language
+	/*!
+		\param $TranslationLanguage String: language code of language spoken on table
+		\return CafeLanguage instance
+	*/
 	public function language($TranslationLanguage) {
 		return new CafeLanguage($this->dbh, $this->language_id, $TranslationLanguage);
 	}
 
+	//! Return user object representing host of this table.
+	/*!
+		\return CafeUser instance
+	*/
 	public function host() {
 		return new CafeUser($this->dbh, $this->host_user_id);
 	}
 
+	//! Get Conversation associated with this Table for a particular Round, if any
+	/*!
+	\param $round_id Integer: ID of round for which to get convesation.
+	\return CafeConversation instance or NULL
+	*/
 	public function conversation_for_round($round_id) {
 			$sth = $this->dbh('select ConversationID from Conversation where TableID = ? and RoundID = ?');
 			$sth-execute([$this->id, $round_id]);
@@ -814,16 +1023,25 @@ class CafeTable {
 
 }
 
+//!  Represents a conversation.
+/*!
+Conversations table place at a Table, during a particular Round, part of a Section of an Event. An actual Zoom teleconference conversation is represented by this class, which stores the Zoom URL amongst other properties.
+*/
 class CafeConversation {
-	private $dbh;
+	private $dbh; /*!< Database handle for SQL queries */
+	public $id; /*!< Integer: user ID (auto allocated by MySQL) */
+	public $round_id; /*!< Integer: ID of round with which this conversation is associated */
+	public $table_id; /*!< Integer: Id of table with which this conversation is associated */
+	public $zoom_link; /*!< String: URL of Zoom conversation this object represents */
 
-	public $id;
-	public $round_id;
-	public $table_id;
-	public $zoom_link;
+	public $full; /*!< Bool: temporary property when allocating conversations - indicates if conversation is 'full', ie max participants reached */
 
-	public $full; // Temporary property when allocating conversations - indicates if conversation is 'full', ie max participants reached
-
+	//! Creates an instance of CafeConversation, loaded from an existing database record.
+	/*!
+		\param $dbh_in Database handle
+		\param $id_in Integer: ID of user record in database
+		\return CafeConversation instance
+	*/
 	public function __construct(\PDO $dbh_in, $id_in) {
 		$this->dbh = $dbh_in;
 		$this->id = $id_in;
@@ -836,6 +1054,13 @@ class CafeConversation {
 		$this->zoom_link = $row['ZoomLink'];
 	}
 
+	//! Creates an instance of CafeConversation and store in database. Note that code actually calls the constructor, which reloads the just-created record from the database, which is a bit suboptimal but ensures consistency with the database, eg if MySQL assigns default values to fields.
+	/*!
+		\param $dbh_in Database handle
+		\param $round_id Integer: ID of round to which this conversation corresponds
+		\param $table_id Integer: ID of table to which this conversation corresponds
+		\return CafeConversation instance
+	*/
 	public static function create(\PDO $dbh_in, $round_id, $table_id) {
 			$sth = $dbh_in->prepare('insert into Conversation set RoundID = ?, TableID = ?');
 			$sth->execute([$round_id, $table_id]);
@@ -843,16 +1068,26 @@ class CafeConversation {
 			return new CafeConversation($dbh_in, $id);
 	}
 
+	//! Get the round with which this conversation is associated.
+	/*!
+		\return CafeRound instance
+	*/
 	public function round() {
 		return new CafeRound($this->dbh, $this->round_id);
 	}
 
+	//! Get the table with which this conversation is associated.
+	/*!
+		\return CafeTable instance
+	*/
 	public function table() {
 		return new CafeTable($this->dbh, $this->table_id);
 	}
 
-	/* Return details of other users in the conversation */
-
+	//! List all the users in the conversation (including the host who is also attached to the table).
+	/*!
+		\return Array of CafeUser instances
+	*/
 	public function users() {
 		$sth = $this->dbh->prepare('select UserID from UserConversation where ConversationID = ?');
 		$sth->execute([$this->id]);
@@ -866,6 +1101,10 @@ class CafeConversation {
 
 	}
 
+	//! Get the thoughts (user-submitted text snippets) associated with this conversation.
+	/*!
+		\return Array of CafeThought instances
+	*/
 	public function thoughts() {
 		$sth = $this->dbh->prepare('select ThoughtID from Thought where ConversationID = ? order by Stamp');
 		$sth->execute([$this->id]);
@@ -881,11 +1120,15 @@ class CafeConversation {
 
 }
 
+//!  Represents a 'thought' (text snippet) submitted to the system as part of a conversation by a user.
+/*!
+*/
+
 class CafeThought {
-	public $id;
-	public $text;
-	public $conversation_id;
 	private $dbh; /*!< Database handle for SQL queries */
+	public $id; /*!< Integer: user ID (auto allocated by MySQL) */
+	public $text; /*!< Text of thought */
+	public $conversation_id; /*!< ID of conversation to which this thought corresponds */
 
 	public function __construct(\PDO $dbh_in, $id_in) {
 		$this->dbh = $dbh_in;
@@ -900,11 +1143,22 @@ class CafeThought {
 
 }
 
-class CafeCountry {
-	public $code;
-	public $name;
+//!  Represents a country (which a user specifies during registration), rendered in a specified language
+/*!
+*/
 
+class CafeCountry {
 	private $dbh; /*!< Database handle for SQL queries */
+	public $code; /*!< Country code, eg 'es' */
+	public $name; /*!< Country name, localised */
+
+	//! Creates an instance of CafeCountry, loaded from an existing database record.
+	/*!
+		\param $dbh_in Database handle
+		\param $code_in String: country code, eg 'es'
+		\param $translation_language String: language in which to represent the country name, eg 'en'
+		\return CafeCountry instance
+	*/
 	public function __construct(\PDO $dbh_in, $code_in, $translation_language) {
 		$this->dbh = $dbh_in;
 		$this->code = $code_in;
@@ -915,6 +1169,12 @@ class CafeCountry {
 		$this->name = $row['Val'];
 	}
 
+	//! List all countries, localised to a particular language
+	/*!
+		\param $dbh_in Database handle
+		\param $translation_language String: language in which to represent the country names, eg 'en'
+		\return Array of CafeCountry instances
+	*/
 	public static function enum(\PDO $dbh_in, $translation_language) {
 		$sth = $dbh_in->prepare("select * from Country where TranslationLanguage = ?");
 		$sth->execute([$translation_language]);
@@ -929,11 +1189,22 @@ class CafeCountry {
 
 }
 
-class CafeLanguage {
-	public $code;
-	public $name;
+//!  Represents a language (which a user specifies during registration), rendered in a specified language
+/*!
+*/
 
+class CafeLanguage {
 	private $dbh; /*!< Database handle for SQL queries */
+	public $code; /*!< Language code, eg 'en' */
+	public $name; /*!< Name of language, localised */
+
+	//! Creates an instance of CafeLanguage, loaded from an existing database record.
+	/*!
+		\param $dbh_in Database handle
+		\param $code_in String: language code, eg 'en'
+		\param $translation_language String: language in which to represent the language name, eg 'en'
+		\return CafeLanguage instance
+	*/
 	public function __construct(\PDO $dbh_in, $code_in, $translation_language) {
 		$this->dbh = $dbh_in;
 		$this->code = $code_in;
@@ -944,6 +1215,12 @@ class CafeLanguage {
 		$this->name = $row['Val'];
 	}
 
+	//! List all languages, names localised to a particular language
+	/*!
+		\param $dbh_in Database handle
+		\param $translation_language String: language in which to represent the language names, eg 'en'
+		\return Array of CafeLanguage instances
+	*/
 	public static function enum(\PDO $dbh_in, $translation_language) {
 		$sth = $dbh_in->prepare("select * from Language where TranslationLanguage = ?");
 		$sth->execute([$translation_language]);

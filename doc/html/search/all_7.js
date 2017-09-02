@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['generate_5fhost_5flist',['generate_host_list',['../classCafe.html#a32bfbf9bb437d6bdda872cadb91cc342',1,'Cafe\generate_host_list()'],['../classCafe.html#a32bfbf9bb437d6bdda872cadb91cc342',1,'Cafe\generate_host_list()']]],
+  ['generate_5fkey',['generate_key',['../table-allocation_8php.html#a52fe2bd597dfc30c777f34f54eac57c8',1,'table-allocation.php']]],
+  ['generate_5frandom_5fuser',['generate_random_user',['../algorithm_8php.html#ad19acb6d920aecc206aef7a2aa3d899b',1,'algorithm.php']]],
+  ['generate_5ftables',['generate_tables',['../algorithm_8php.html#a7e6c2916933f3bb5027ed5d1d7f291f9',1,'generate_tables($Diem):&#160;algorithm.php'],['../table-allocation_8php.html#a117cf7b857adac42f763a99a8bb45c21',1,'generate_tables($Diem, $monolin_ready, $bilin_ready, $trilin_ready, $languages, $table_array):&#160;table-allocation.php']]],
+  ['get_5fbil_5fused',['get_bil_used',['../classCafe.html#a97a0701975e2b1c4874d627da8ff4461',1,'Cafe']]],
+  ['get_5flang_5fused',['get_lang_used',['../classCafe.html#ad16522b58c6fe07d4750e033f025c1c3',1,'Cafe']]],
+  ['get_5ftril_5fused',['get_tril_used',['../classCafe.html#ab7ee6c69393e08a535495e0f1fbf8b3c',1,'Cafe']]],
+  ['getbil',['getBil',['../classCafe.html#a7e6e5e32cae1cf737c12072c07c1a782',1,'Cafe']]],
+  ['getchairs',['getChairs',['../classTable.html#ab01a965b9a8d39acf757f030c9b986c4',1,'Table\getChairs()'],['../classTable.html#ab01a965b9a8d39acf757f030c9b986c4',1,'Table\getChairs()']]],
+  ['getclienbyid',['getClienById',['../classCafe.html#a0acc7167493ff81c799f330e46d3ab72',1,'Cafe']]],
+  ['getclient',['getClient',['../classClient.html#a1f4e6e131a3f408a645a0cc9ba48e9c5',1,'Client\getClient()'],['../classClient.html#a1f4e6e131a3f408a645a0cc9ba48e9c5',1,'Client\getClient()']]],
+  ['getclients',['getClients',['../classCafe.html#a5bc8982804f6737fa988dee6b9735006',1,'Cafe\getClients()'],['../classCafe.html#a5bc8982804f6737fa988dee6b9735006',1,'Cafe\getClients()']]],
+  ['getdiem',['getDiem',['../classClient.html#a3462482f8935ed16a78e3a6c04ac3127',1,'Client\getDiem()'],['../classClient.html#a3462482f8935ed16a78e3a6c04ac3127',1,'Client\getDiem()']]],
+  ['gethost',['getHost',['../classClient.html#a58ff04791ea3f9fac1cdea3ab6177b29',1,'Client\getHost()'],['../classClient.html#a58ff04791ea3f9fac1cdea3ab6177b29',1,'Client\getHost()']]],
+  ['gethosts',['getHosts',['../classCafe.html#a76ba426ab94341cd4c5fb0bf7ab9bd9d',1,'Cafe\getHosts()'],['../classCafe.html#a76ba426ab94341cd4c5fb0bf7ab9bd9d',1,'Cafe\getHosts()']]],
+  ['getlanguage',['getLanguage',['../classClient.html#a8def0785865cebd36391aee0ffc880f9',1,'Client\getLanguage()'],['../classClient.html#a8def0785865cebd36391aee0ffc880f9',1,'Client\getLanguage()']]],
+  ['getmono',['getMono',['../classCafe.html#a0cb35b14af008acb741ff2a6d446dfac',1,'Cafe']]],
+  ['getnation',['getNation',['../classClient.html#add6e69ba52466493ea189678a71563b7',1,'Client\getNation()'],['../classClient.html#add6e69ba52466493ea189678a71563b7',1,'Client\getNation()']]],
+  ['getrounds',['getRounds',['../classCafe.html#ac34b6569713cbe21f6a64ad4e627c6a3',1,'Cafe\getRounds()'],['../classCafe.html#ac34b6569713cbe21f6a64ad4e627c6a3',1,'Cafe\getRounds()']]],
+  ['getsession',['getSession',['../classCafe.html#af54b0d2cb07a41f6dfa8d26379313e39',1,'Cafe\getSession()'],['../classCafe.html#af54b0d2cb07a41f6dfa8d26379313e39',1,'Cafe\getSession()']]],
+  ['gettable',['getTable',['../classTable.html#af84dea73c3598d8b0333d06fe530b66d',1,'Table\getTable()'],['../classTable.html#af84dea73c3598d8b0333d06fe530b66d',1,'Table\getTable()']]],
+  ['gettables',['getTables',['../classCafe.html#a859d0cd90430b00c841365bcf7913700',1,'Cafe\getTables()'],['../classCafe.html#a859d0cd90430b00c841365bcf7913700',1,'Cafe\getTables()']]],
+  ['gettril',['getTril',['../classCafe.html#a73582065495210ac9a04291496b64244',1,'Cafe']]],
+  ['glyphify',['glyphify',['../register_8php.html#a9f57d67f3e9764de2428012b0f8f6e96',1,'register.php']]]
+];
