@@ -26,6 +26,9 @@ $current_event = CafeEvent::current($dbh);
           break;
         case 'finished':
           echo '<p>' . $I18N->t('last_event') . ': ' . htmlentities($current_event->name) . '</p>';
+          echo '<p>We are sorry to announce that the event scheduled for next week has had to be postponed pending further development of the DiEM Café system.</p>';
+          echo '<p>We will inform you as soon as everything is ready.</p>';
+          echo '<p>If you have IT skills and would like to volunteer to help with the development of the platform please contact us at: <a href="mailto:did.diem25@gmail.org">did.diem25@gmail.org</a>.</p>';
           break;
       }
       ?>
